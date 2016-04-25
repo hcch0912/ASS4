@@ -1,5 +1,42 @@
+#map {
+	width: 1280px;
+	height: 1280px;
+	background-image: url("http://maps.googleapis.com/maps/api/staticmap?center=SanDiego&size=640x640&scale=2&style=element:labels|visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyC-ei_b2CWVhDAm0LGgJqthcUCWJ-Kiy9s");
+}
+
 .chart {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.chart .legend {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: start;
+  font-size: 12px;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.chart .label {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: end;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis path,
+
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }

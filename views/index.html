@@ -3,46 +3,14 @@
 <meta charset="utf-8">
 <html>
 <head>
-<style>
-.chart .legend {
-  fill: black;
-  font: 14px sans-serif;
-  text-anchor: start;
-  font-size: 12px;
-}
-
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-.chart .label {
-  fill: black;
-  font: 14px sans-serif;
-  text-anchor: end;
-}
-
-.bar:hover {
-  fill: brown;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-</style>
-
-
 </head>
+<body>
 
-<h1>The rental price chart in San Diego</h1>
-<svg class="chart"></svg>
+  <h1>The rental price chart in San Diego</h1>
+  <!--<svg class="chart"></svg>-->
+  <div id="map"></div>
 
-<img src="http://maps.googleapis.com/maps/api/staticmap?center=SanDiego&size=640x640&scale=2&style=element:labels|visibility:on&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyC-ei_b2CWVhDAm0LGgJqthcUCWJ-Kiy9s"/>
+</body>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="../js/index.js"></script>
