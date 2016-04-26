@@ -1,0 +1,209 @@
+{
+	"locations": [
+		{
+			"name": "Carlsbad",
+			"latitude":	"33.1216437",
+			"longitude": "-117.3577597"	
+		},
+		{
+			"name": "Oceanside",
+			"latitude":	"33.1748202",
+			"longitude": "-117.3506747"	
+		},
+		{
+			"name": "Pendleton",
+			"latitude":	"45.6736376",
+			"longitude": "-118.8455005"	
+		},
+		{
+			"name": "San Dieguito",
+			"latitude":	"33.0036839",
+			"longitude": "-117.3735664"	
+		},
+		{
+			"name": "Vista",
+			"latitude":	"33.1849783",
+			"longitude": "-117.3106829"	
+		},
+		{
+			"name": "Coastal",
+			"latitude":	"33.1848999",
+			"longitude": "-117.31137"	
+		},
+		{
+			"name": "Del Mar-Mira Mesa",
+			"latitude":	"32.9060175",
+			"longitude": "-117.1788357"	
+		},
+		{
+			"name": "Elliott-Navajo",
+			"latitude":	"32.8696125",
+			"longitude": "-117.2508277"	
+		},
+		{
+			"name": "Kearny Mesa",
+			"latitude":	"32.8278821",
+			"longitude": "-117.1812559"	
+		},
+		{
+			"name": "Miramar",
+			"latitude":	"32.8687683",
+			"longitude": "-117.2233634"	
+		},
+		{
+			"name": "Peninsula",
+			"latitude":	"32.8117415",
+			"longitude": "-117.2700404"	
+		},
+		{
+			"name": "University",
+			"latitude":	"32.7716748",
+			"longitude": "-117.1969438"
+		},
+		{
+			"name": "Central San Diego",
+			"latitude":	"32.7165646",
+			"longitude": "-117.1815126"
+		},
+		{
+			"name": "Mid-City",
+			"latitude":	"32.7498682",
+			"longitude": "-117.1347698"
+		},
+		{
+			"name": "Southeastern San Diego",
+			"latitude":	"32.6931776",
+			"longitude": "-117.1673859"
+		},
+		{
+			"name": "Chula Vista",
+			"latitude":	"32.6316883",
+			"longitude": "-117.1613097"
+		},
+		{
+			"name": "Coronado",
+			"latitude":	"32.6501528",
+			"longitude": "-117.240759"
+		},
+		{
+			"name": "National City",
+			"latitude":	"32.6698445",
+			"longitude": "-117.1597977"
+		},
+		{
+			"name": "South Bay",
+			"latitude":	"32.5782473",
+			"longitude": "-117.0996111"
+		},
+		{
+			"name": "Sweetwater",
+			"latitude":	"32.5782424",
+			"longitude": "-117.1313603"
+		},
+		{
+			"name": "Alpine",
+			"latitude":	"32.8439803",
+			"longitude": "-116.8270788"
+		},
+		{
+			"name": "El Cajon",
+			"latitude":	"32.7992794",
+			"longitude": "-117.0234289"
+		},
+		{
+			"name": "Harbison-Crest",
+			"latitude":	"32.801910",
+			"longitude": "-116.869095"
+		},
+		{
+			"name": "Jamul",
+			"latitude":	"32.7160919",
+			"longitude": "-116.9424709"
+		},
+		{
+			"name": "La Mesa",
+			"latitude":	"32.7698298",
+			"longitude": "-117.0880069"
+		},
+		{
+			"name": "Laguna-Pine Valley",
+			"latitude":	"32.8264333",
+			"longitude": "-116.5402654"
+		},
+		{
+			"name": "Lemon Grove",
+			"latitude":	"32.7326685",
+			"longitude": "-117.0740245"
+		},
+		{
+			"name": "Mountain Empire",
+			"latitude":	"32.7314105",
+			"longitude": "-117.6009529"
+		},
+		{
+			"name": "Santee",
+			"latitude":	"32.8592128",
+			"longitude": "-117.0584754"
+		},
+		{
+			"name": "Spring Valley",
+			"latitude":	"32.7294188",
+			"longitude": "-117.0496419"
+		},
+		{
+			"name": "Anza-Borrego",
+			"latitude":	"33.100492",
+			"longitude": "-116.3035207"
+		},
+		{
+			"name": "Escondido",
+			"latitude":	"33.1346466",
+			"longitude": "-117.210408"
+		},
+		{
+			"name": "Fallbrook",
+			"latitude":	"33.3662913",
+			"longitude": "-117.2852094"
+		},
+		{
+			"name": "North San Diego",
+			"latitude":	"33.1038186",
+			"longitude": "-117.3062213"
+		},
+		{
+			"name": "Palomar-Julian",
+			"latitude":	"33.0740207",
+			"longitude": "-116.6573884"
+		},
+		{
+			"name": "Pauma",
+			"latitude":	"33.3033662",
+			"longitude": "-116.9989693"
+		},
+		{
+			"name": "Poway",
+			"latitude":	"32.9967013",
+			"longitude": "-117.1529081"
+		},
+		{
+			"name": "Ramona",
+			"latitude":	"33.0352608",
+			"longitude": "-116.9404094"
+		},
+		{
+			"name": "San Marcos",
+			"latitude":	"33.1344312",
+			"longitude": "-117.2405203"
+		},
+		{
+			"name": "Valley Center",
+			"latitude":	"33.2261083",
+			"longitude": "-117.0908859"
+		},
+		{
+			"name": "Crest-El Cajon",
+			"latitude":	"32.799973",
+			"longitude": "-116.893613"
+		}
+	]
+}
