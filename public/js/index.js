@@ -1,22 +1,34 @@
+var map;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('jsmap'), {
+    center: {lat: 32.842674, lng: -117.257767},
+    zoom: 11
+  });
+  console.log("aaa");
+}
+
 (function(d3) {
   "use strict";
 
-  var datas={"labels":[],
-            "series":[
-            {
-              "labels":[],
-              "values":[]
-            },
-            {
-              "labels":[],
-              "values":[]
-            },
-            {
-              "labels":[],
-              "values":[]
-            }                        
-            ]
+  var datas = {
+    "labels": [],
+    "series": [
+      {
+        "labels": [],
+        "values": []
+      },
+      {
+        "labels": [],
+        "values": []
+      },
+      {
+        "labels": [],
+        "values": []
+      }                        
+    ]
   };
+
 d3.json("/delphidata", function(err, data) {
 
     if (err) {
@@ -40,12 +52,7 @@ d3.json("/delphidata", function(err, data) {
    datas.series[1].values=priceArr1[1];
    datas.series[2].values=priceArr1[2];
 
-
-
-
-
- 
- var dataSeriesSize=3;
+var dataSeriesSize=3;
 
 var chartWidth       = 300,
     barHeight        = 20,
