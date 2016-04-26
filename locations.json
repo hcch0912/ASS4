@@ -1,0 +1,209 @@
+{
+	"locations": [
+		{
+			"name": "Carlsbad",
+			"latitude":	"33.1216437",
+			"longitude": "-117.3577597"	
+		},
+		{
+			"name": "Oceanside",
+			"latitude":	"33.1748202",
+			"longitude": "-117.3506747"	
+		},
+		{
+			"name": "Pendleton",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "San Dieguito",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Vista",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Coastal",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Del Mar-Mira Mesa",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Elliott-Navajo",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Kearny Mesa",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Miramar",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Peninsula",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "University",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Central San Diego",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Mid-City",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Southeastern San Diego",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Chula Vista",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Coronado",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "National City",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "South Bay",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Sweetwater",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Alpine",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "El Cajon",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Harbison-Crest",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Jamul",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "La Mesa",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Laguna-Pine Valley",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Lemon Grove",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Mountain Empire",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Santee",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Spring Valley",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Anza-Borrego",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Escondido",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Fallbrook",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "North San Diego",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Palomar-Julian",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Pauma",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Poway",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Ramona",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "San Marcos",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Valley Center",
+			"latitude":	"",
+			"longitude": ""	
+		},
+		{
+			"name": "Crest-El Cajon",
+			"latitude":	"",
+			"longitude": ""	
+		}
+	]
+}
