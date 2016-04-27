@@ -66,9 +66,20 @@
       single.addListener('click', function() {
         
         renderPie(areaName);
+      });
     });
-  });
-  }
+
+    map.addListener('zoom_changed', function() {
+    var zoom = map.getZoom();
+    if (zoom <= 8){
+      window.setTimeout(function() {
+      map.panTo(center);
+      map.setZoom(10);
+      
+      }, 3000);
+    }
+    });
+}
  function  renderPie(areaName) {
 }
     </script>
