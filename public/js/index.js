@@ -1,5 +1,16 @@
 var map;
-var location = JSON.parse(locations);
+
+$(document).ready(function() {
+  $('li').click(function(){
+    var tab_id = $(this).attr('data-tab');
+
+    $('li').removeClass('curr-tab');
+    $('.tab-content').removeClass('current');
+
+    $(this).addClass('curr-tab');
+    $("#"+tab_id).addClass('current');
+  })
+});
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('jsmap'), {

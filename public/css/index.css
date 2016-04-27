@@ -25,6 +25,14 @@ html, body {
 
 #sidebar h1 {
 	text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+  font-weight: normal;
+  letter-spacing: -1px;
+  color: #000000;
+  line-height: 50px;
+  border-bottom: #000000 2px solid;
+  margin: 5px 0px 5px 0px;
 }
 
 #jsmap {
@@ -41,7 +49,6 @@ html, body {
   fill: black;
   font: 14px sans-serif;
   text-anchor: start;
-  font-size: 12px;
 }
 
 .chart text {
@@ -54,7 +61,7 @@ html, body {
   fill: black;
   font: 14px sans-serif;
   text-anchor: end;
-}
+  }
 
 .bar:hover {
   fill: brown;
@@ -66,4 +73,44 @@ html, body {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.tabs {
+  width: 32vw;
+  margin: auto;
+  padding: 0px;
+  list-style: none;
+}
+
+.tabs li {
+  display: inline-block;
+  height: 40px;
+  width: 15vw;
+  line-height: 40px;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Open Sans",sans-serif;
+  color: #222222;
+  text-decoration: none;
+  letter-spacing: -2px;
+  color: #000000;
+}
+
+.curr-tab {
+  color: #0066cc!important;
+}
+
+.tab-content {
+  display: none;
+  font-family: "Open Sans",sans-serif;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.current {
+  display: block!important;
+}
+
+.content {
+  clear: both;]
 }
