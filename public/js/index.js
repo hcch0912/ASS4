@@ -1,4 +1,5 @@
 var map;
+var location = JSON.parse(locations);
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('jsmap'), {
@@ -6,6 +7,12 @@ function initMap() {
     zoom: 11
   });
   console.log("aaa");
+
+  // place markers on the map
+  for(i in location) {
+    console.log(location[i].name);
+  }
+
 }
 
 (function(d3) {
