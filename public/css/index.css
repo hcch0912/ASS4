@@ -59,9 +59,9 @@ html, body {
 
 .chart .label {
   fill: black;
-  font: 14px sans-serif;
+  font: 11px sans-serif;
   text-anchor: end;
-  }
+}
 
 .bar:hover {
   fill: brown;
