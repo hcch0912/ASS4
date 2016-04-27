@@ -1,6 +1,9 @@
 var map;
 
 $(document).ready(function() {
+
+  initMap();
+
   $('li').click(function(){
     var tab_id = $(this).attr('data-tab');
 
@@ -12,7 +15,7 @@ $(document).ready(function() {
   })
 });
 
-function initMap() {
+/*function initMap() {
   map = new google.maps.Map(document.getElementById('jsmap'), {
     center: {lat: 32.842674, lng: -117.157767},
     zoom: 11
@@ -24,7 +27,7 @@ function initMap() {
     console.log(location[i].name);
   }
 
-}
+};*/
 
 (function(d3) {
   "use strict";
