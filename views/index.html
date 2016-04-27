@@ -12,7 +12,27 @@
     <svg class="chart"></svg>
     <!--<div id="map"></div>-->
   </div>
-  <div id="jsmap"></div>
+  <div id="jsmap">
+  <script>
+
+      function initMap() {
+      	var map = new google.maps.Map(document.getElementById('jsmap'), {
+          zoom: 10,
+          center: {lat: 32.9770911, lng: -117.2448969}
+        });
+      	{{#each locations}}
+      	console.log('{{name}}');
+        var marker = new google.maps.Marker({
+          position: {lat: {{latitude}}, lng: {{longitude}} },
+          map: map,
+          title: '{{name}}'
+        });
+        {{/each}}
+      }
+    </script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap"
+  ></script>
+  </div>
 
 </body>
 
@@ -21,5 +41,6 @@
 <script type="text/javascript" src="../js/index.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap"
   async defer></script>
+
 
 </html> 
