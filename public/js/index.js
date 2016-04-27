@@ -16,7 +16,9 @@ $(document).ready(function() {
   })
 });
 
-
+  function clearPir(){
+      d3.selectAll().remove();
+  };
 
  function  renderPie(areaName) {
   "use strict";
@@ -44,8 +46,8 @@ $(document).ready(function() {
     };
 console.log(thisArea.Area);
 
-  var width = 960,
-      height = 500,
+  var width = 300,
+      height = 330,
       radius = Math.min(width, height) / 2;
 
   var color = d3.scale.category20();
@@ -62,7 +64,7 @@ console.log(thisArea.Area);
       .sort(null)
       .value(function(d) { return d.number; });
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".chart").append("svg")
       .attr("width", width)
       .attr("height", height)
     .append("g")
@@ -72,7 +74,7 @@ console.log(thisArea.Area);
 
     var g = svg.selectAll(".arc")
         .data(pie(thisArea.Data))
-      .enter().append("g")
+        .enter().append("g")
         .attr("class", "arc");
 
     g.append("path")
@@ -81,7 +83,9 @@ console.log(thisArea.Area);
 
     g.append("text")
         .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-        .attr("dy", ".35em")
+        .attr("dy", ".25em")
+        .attr("font-size","15px")
+        .attr("z-index","100")
         .text(function(d) {return d.data.price; });
 
     // var text=document.getElementById("h1");
