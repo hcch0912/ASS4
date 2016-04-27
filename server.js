@@ -31,7 +31,8 @@ app.set('port', process.env.PORT || 3000);
 
 //routes
 app.get('/', function(req, res){
-  res.render('index');
+  var locationData = require('./locations.json');
+  res.render('index', locationData);
 });
 
 app.get('/delphidata', function (req, res) {
