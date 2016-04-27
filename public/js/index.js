@@ -1,11 +1,29 @@
 var map;
 
+$(document).ready(function() {
+  $('li').click(function(){
+    var tab_id = $(this).attr('data-tab');
+
+    $('li').removeClass('curr-tab');
+    $('.tab-content').removeClass('current');
+
+    $(this).addClass('curr-tab');
+    $("#"+tab_id).addClass('current');
+  })
+});
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('jsmap'), {
     center: {lat: 32.842674, lng: -117.157767},
     zoom: 11
   });
   console.log("aaa");
+
+  // place markers on the map
+  for(i in location) {
+    console.log(location[i].name);
+  }
+
 }
 
 (function(d3) {
