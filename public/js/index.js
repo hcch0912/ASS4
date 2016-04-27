@@ -2,7 +2,7 @@ var map;
 
 $(document).ready(function() {
 
-  initMap();
+  //initMap();
 
   $('li').click(function(){
     var tab_id = $(this).attr('data-tab');
