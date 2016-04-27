@@ -37,10 +37,10 @@
     <!--<div id="map"></div>-->
   </div>
   <div id="jsmap">
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap"></script>
   <script>
 
       function initMap() {
+      	console.log("I only work sometimes for some reason");
       	var center = new google.maps.LatLng(32.9770911, -117.2448969);
 		var options = {
   			'zoom': 10,
@@ -71,6 +71,7 @@
         {{/each}} */
       }
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap"></script>
   </div>
 
 </body>
