@@ -57,6 +57,12 @@
   			markers.push(marker);
 		{{/each}}
 		var markerCluster = new MarkerClusterer(map, markers);
+    markers.map(function(single){
+      single.addListener('click', function() {
+      console.log('Kayaking across the pacific ocean fills you with determination');
+      //map.setCenter(marker.getPosition());
+      });
+    });
     /*  	var map = new google.maps.Map(document.getElementById('jsmap'), {
           zoom: 10,
           center: {lat: 32.9770911, lng: -117.2448969}
