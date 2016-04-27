@@ -55,14 +55,14 @@
 		var markers = [];
 		{{#each locations}}
   			var latLng = new google.maps.LatLng({{latitude}}, {{longitude}});
-  			var marker = new google.maps.Marker({'position': latLng});
+  			var marker = new google.maps.Marker({position: latLng, title:'{{name}}' });
   			markers.push(marker);
 		{{/each}}
 		var markerCluster = new MarkerClusterer(map, markers);
 
 
     markers.map(function(single){
-    var areaName="Oceanside";
+    var areaName=single.title;
       single.addListener('click', function() {
         renderPie(areaName);
     });
