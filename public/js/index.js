@@ -40,7 +40,7 @@ $(document).ready(function() {
          
     for(var i=0;i<dataset.length;i++){
       if(dataset[i].Area==areaName){
-        console.log("success"+areaName);
+        console.log("success "+areaName);
         thisArea=dataset[i];
       }
     };
