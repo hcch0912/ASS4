@@ -67,6 +67,7 @@
 		the map autocenters and resets to the default zoom.
 
 [ Design Decisions ] -------------------------------------------------------------
+		
 		Initially we had thought of drawing our own landscape and 
 		district boundaries through D3, but it would lack the interactvity 
 		of being able to contextualize the map on its topography.
