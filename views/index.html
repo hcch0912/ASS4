@@ -8,7 +8,6 @@
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script src="./js/socket.io.min.js"></script>
 
 </head>
 <body>
@@ -25,16 +24,20 @@
 
       <div id="contents">
         <div id="tab-1" class="tab-content current">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. abt
+          Click on a district below or a marker on the map to display rental information
+          <hr>
           <div></div>
           {{#each locations}}
           <button id="link" value = '{{name}}'>{{name}}</button>
           {{/each}}
-        </div>
-        <div id="tab-2" class="tab-content">
+          <hr>
             <h2 id="current-title"></h2>
             <div id = "city"></div>
            <svg class="chart"></svg>
+
+        </div>
+        <div id="tab-2" class="tab-content">
+
         </div>
       </div>
 
@@ -63,16 +66,13 @@
   			markers.push(marker);
 		{{/each}}
 		var markerCluster = new MarkerClusterer(map, markers);
-
-
-    markers.map(function(single){
+     markers.map(function(single){
     var areaName=single.title;
       single.addListener('click', function() {
         
         renderPie(areaName);
       });
     });
-
    
     
 }

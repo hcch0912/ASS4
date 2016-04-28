@@ -10,6 +10,7 @@ html, body {
 	padding: 0;
 }
 
+
 #sidebar {
 	float: left;
 	width: 32vw;
@@ -53,8 +54,8 @@ html, body {
 }
 
 .chart text {
-  fill: white;
-  font: 10px sans-serif;
+  fill: #000;
+  font-size: 1em;
   text-anchor: end;
 }
 

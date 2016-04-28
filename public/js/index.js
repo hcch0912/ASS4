@@ -6,6 +6,7 @@ $(document).ready(function() {
   //initMap();
   $("button").click(function() {
         console.log(this.value);
+        $('.chart').empty();
         renderPie(this.value);
     });
 
