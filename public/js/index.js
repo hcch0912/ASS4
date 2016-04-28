@@ -4,6 +4,10 @@ var map;
 $(document).ready(function() {
 
   //initMap();
+  $("button").click(function() {
+        console.log(this.value);
+        renderPie(this.value);
+    });
 
   $('li').click(function(){
     var tab_id = $(this).attr('data-tab');
