@@ -35,6 +35,7 @@ $(document).ready(function() {
 
  function  renderPie(areaName) {
   "use strict";
+  document.getElementById('city').innerHTML = areaName;
  d3.json("/delphidata", function(err, resData) {
  var dataset=[];
  var thisArea;
