@@ -82,6 +82,7 @@ html, body {
   margin: auto;
   padding: 0px;
   list-style: none;
+  text-align: center;
 }
 
 .tabs li {
