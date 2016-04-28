@@ -70,6 +70,21 @@
         renderPie(areaName);
       });
     });
+
+ map.addListener('zoom_changed', function() {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+    
+    var zoom = map.getZoom();
+    if(zoom <= 8){
+      window.setTimeout(function() {
+      map.setZoom(10);
+      map.setCenter(center);
+
+    }, 2000);
+    }
+    
+  });
    
     
 }
