@@ -13,7 +13,16 @@ $(document).ready(function() {
 
     $(this).addClass('curr-tab');
     $("#"+tab_id).addClass('current');
-  })
+  });
+
+  $('.list').click(function(){
+    var name = $(this).text();
+    console.log(name);
+    
+    renderPie("Carlsbad");
+    $('#current-title').html(name);
+    $( ".tab-link" ).trigger( "click" );
+  });
 });
 
   function clearPir(){
