@@ -10,40 +10,17 @@ var populationTable="cogs121_16_raw.hhsa_san_diego_demographics_county_populatio
 var policeTable="cogs121_16_raw.sandag_lawenforcementfacilities_prj";
 
 
-var getData = module.exports.getData = function (req, res) {
+module.exports.getParkData = function (req,res) {
 
 	var inputlocation=req.params.inputlocation;
-	
-
-	var parkList=getParks(inputlocation);
-
-	var popuList=getPopulation(inputlocation);
-	var policeList=getPolice(inputlocation);
-
-	if(parkList||policeList||popuList){
-
-	var lists={
-		"parks":parkList,
-		"police":policeList,
-		"population":popuList
-	};
-
-	res.json(lists);
-	}else{
-  		return { delphidata: "No data present." }
-	}
 
 
-
-	function getParks(inputlocation){
-		
-		
-	    pg.connect(conString, function(err, client, done) {
+	pg.connect(conString, function(err, client, done) {
 	        // Handle connection errors
 	       if(err) {
 	          done();
 	          console.log(err);
-	          return res.status(500).json({ success: false, data: err});
+	         return res.status(500).json({ success: false, data: err});
 	        }
 	        //Query Park data
 	        var selectParkQuery=
@@ -51,55 +28,89 @@ var getData = module.exports.getData = function (req, res) {
 	        	+" from "+parkTable
 	        	+" where address_lo is not null AND  designated='COMMUNITY PARK'";
 	        var queryPark = client.query(selectParkQuery,function(err,res1){
+	        	
 	        	if(res1){
-	        		//console.log(res1.rows);
-	        		return res1.rows;
-	        	}
+	        		
+	        		return res.json(res1.rows);
+	        		console.log("one result");
+	        		
+	        	}else{
+			  		return res.json( { delphidata: "No data present." });
+				}
+	        	 
 	        });
+	       
 		});
-	}
-
-	function getPopulation(inputlocation){
 		
-	    pg.connect(conString, function(err, client, done) {
+}
+
+
+module.exports.getPopulationData = function (req,res) {
+
+	var inputlocation=req.params.inputlocation;
+	
+
+	pg.connect(conString, function(err, client, done) {
 	        // Handle connection errors
-	        if(err) {
+	       if(err) {
 	          done();
 	          console.log(err);
-	          return res.status(500).json({ success: false, data: err});
+	          return { success: false, data: err};
 	        }
-	        //Query population data
-	        var getPopuQuery="select \"Area\" ,\"Total 2012 Population\" from "+populationTable; 
-	        var queryPopu = client.query(getPopuQuery);
-
-	        var queryPopu = client.query(getPopuQuery,function(err,res1){
+	        //Query Park data
+	        var selecPopulationQuery=
+	        	"select DISTINCT ON (common_nam) common_nam , community_ "
+	        	+" from "+parkTable
+	        	+" where address_lo is not null AND  designated='COMMUNITY PARK'";
+	        var queryPopulation = client.query(selecPopulationQuery,function(err,res1){
+	          	
 	        	if(res1){
-	        		console.log(res1.rows);
-	        		return res1.rows;
-	        	}
+	        		
+	        		return res.json(res1.rows);
+	        		console.log("one result");
+	        		
+	        	}else{
+			  		return res.json( { delphidata: "No data present." });
+				}
+	        	 
 	        });
-	    });
-	}
-
-	function getPolice(inputlocation){
+	       
+		});
 		
-	    pg.connect(conString, function(err, client, done) {
+}
+
+module.exports.getPoliceData = function (req,res) {
+
+	var inputlocation=req.params.inputlocation;
+	
+
+
+	pg.connect(conString, function(err, client, done) {
 	        // Handle connection errors
-	        if(err) {
+	       if(err) {
 	          done();
 	          console.log(err);
-	          return res.status(500).json({ success: false, data: err});
+	          return { success: false, data: err};
 	        }
-	        //Query police data
-	        var getPopuQuery="select \"FACILITY\",\"ADDRESS\",\"CITY\",\"ZIP\" from  "+policeTable; 
-	        var queryPolice = client.query(getPopuQuery);
-
-	        var queryPolice = client.query(getPopuQuery,function(err,res1){
+	        //Query Park data
+	        var selectPoliceQuery=
+	        	"select DISTINCT ON (common_nam) common_nam , community_ "
+	        	+" from "+parkTable
+	        	+" where address_lo is not null AND  designated='COMMUNITY PARK'";
+	        var queryPolice = client.query(selectPoliceQuery,function(err,res1){
+	        	
+	         	
 	        	if(res1){
-	        		console.log(res1.rows);
-	        		return res1.rows;
-	        	}
+	        		
+	        		return res.json(res1.rows);
+	        		console.log("one result");
+	        		
+	        	}else{
+			  		return res.json( { delphidata: "No data present." });
+				}
+	        	 
 	        });
-	    });
-	}
+	       
+		});
+		
 }

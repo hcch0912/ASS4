@@ -34,8 +34,10 @@ app.get('/', function(req, res){
 
 
 //get data
-app.get('/delphidata/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getData);
+app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
 
+app.get('/delphidata/population/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPopulationData);
+app.get('/delphidata/police/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPoliceData);
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

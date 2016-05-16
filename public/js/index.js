@@ -2,18 +2,51 @@
 // get user input 
 function useData(inputlocation){
   var results="success";
-  console.log(inputlocation+"here in public js");
+  
 
- d3.json("/delphidata/"+inputlocation, function(err, resData) {
-  console.log(resData.parks[0]);
+ d3.json("/delphidata/park/"+inputlocation, function(err, resData) {
+
+console.log("hello1");
+  if(resData){
+  console.log(resData);
+ }else{
+  console.log("nono");
+ }
+
+  return results;
+
+});
+
+
+
+
+ d3.json("/delphidata/population/"+inputlocation, function(err, resData) {
+
+console.log("hello2");
+  if(resData){
+  console.log(resData);
+ }else{
+  console.log("nono");
+ }
+
+  return results;
+
+});
+
+
+ d3.json("/delphidata/police/"+inputlocation, function(err, resData) {
+
+console.log("hello3");
+  if(resData){
+  console.log(resData);
+ }else{
+  console.log("nono");
+ }
 
   return results;
 
 });
 }
-
-
-
 
 
 
