@@ -34,42 +34,10 @@ app.get('/', function(req, res){
   res.render('index', locationData);
 });
 
-
-app.get('')
-
-
-app.get('/delphidata', function (req, res) {
- var results=[];
-
-    pg.connect(conString, function(err, client, done) {
-        // Handle connection errors
-        if(err) {
-          done();
-          console.log(err);
-          return res.status(500).json({ success: false, data: err});
-        }
-
-        // SQL Query > Select Data
-        var query = client.query("SELECT * FROM cogs121_16_raw.hhsa_san_diego_demographics_rental_statistics_2012");
-
-        // Stream results back one row at a time
-        query.on('row', function(row) {
-            results.push(row);
-        });
-
-        // After all data is returned, close connection and return results
-        query.on('end', function() {
-            done();
-            return res.json(results);
-        });
-
-    });
-
-
-  return { delphidata: "No data present." }
-});
-
-
+app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
+  
+app.get('/delphidata/population/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPopulationData);
+app.get('/delphidata/police/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPoliceData);
 
 
 http.createServer(app).listen(app.get('port'), function() {

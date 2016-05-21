@@ -32,8 +32,7 @@ module.exports.getParkData = function (req,res) {
 	        var queryPark = client.query(selectParkQuery,function(err,res1){
 	        	
 	        	if(res1){	
-	        		console.log("herein parks");
-	        		console.log("one result"+res1.rows);	
+	        			
 	        		return res.json(res1.rows);
 	        		
 	        	}else{
@@ -93,7 +92,7 @@ module.exports.getPopulationData = function (req,res) {
 	        	if(res1){
 	        		
 	        		return res.json(res1.rows);
-	        		console.log("one result");
+	        		
 	        		
 	        	}else{
 			  		return res.json( { delphidata: "No data present." });
@@ -128,8 +127,7 @@ module.exports.getPoliceData = function (req,res) {
 	         	
 	        	if(res1){
 	        		
-	        		return res.json(res1.rows);
-	        		console.log("one result");
+	        		
 	        		
 	        	}else{
 			  		return res.json( { delphidata: "No data present." });
