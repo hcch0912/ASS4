@@ -1,4 +1,8 @@
+$(document).ready( function () {
+  $('#dragme').draggable();
+});
 
+/*
 // get user input 
 function useData(inputlocation){
   var results="success";
@@ -219,3 +223,4 @@ $(document).ready(function() {
 
 
 
+*/

@@ -5,6 +5,7 @@ var path = require('path');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+
 var dotenv = require('dotenv');
 var pg = require('pg');
 var app = express();
@@ -32,6 +33,9 @@ app.set('port', process.env.PORT || 3000);
 app.get('/', function(req, res){
   var locationData = require('./locations.json');
   res.render('index', locationData);
+});
+app.get('/map', function(req,res){
+  res.render('map');
 });
 
 app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
