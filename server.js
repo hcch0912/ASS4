@@ -5,12 +5,14 @@ var path = require('path');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
-
+var dotenv = require('dotenv');
+var pg = require('pg');
 var app = express();
-var dataEndpoint=require('./data');
+
 //client id and client secret here, taken from .env (which you need to create)
 
+//connect to database
+var conString = process.env.DATABASE_CONNECTION_URL;
 
 //Configures the Template engine
 app.engine('html', handlebars({ defaultLayout: 'layout', extname: '.html' }));
@@ -33,11 +35,42 @@ app.get('/', function(req, res){
 });
 
 
-//get data
-app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
+app.get('')
 
-app.get('/delphidata/population/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPopulationData);
-app.get('/delphidata/police/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPoliceData);
+
+app.get('/delphidata', function (req, res) {
+ var results=[];
+
+    pg.connect(conString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("SELECT * FROM cogs121_16_raw.hhsa_san_diego_demographics_rental_statistics_2012");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+
+
+  return { delphidata: "No data present." }
+});
+
+
+
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

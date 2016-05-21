@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>
-
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
 <head>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>  
@@ -11,15 +11,68 @@
 
 </head>
 <body>
- <script type="text/javascript" src="./js/index.js"></script>
- <script type="text/javascript">
-    function test(){
-        useData("San Diego");
- }
- </script>
 
- <button onclick="test()">test</button>
- 
+  <div id="sidebar">
+    <h1>SoloSD </h1>
+    <hr id ="line">
+    <div id="sidecontent"></div>
+
+  </div>
+
+    <!--<div id="map"></div>-->
+  </div>
+  <div id="jsmap">
+  <script type="text/javascript" src="./js/index.js"></script>
+  <script>
+    function initMap() {
+      	console.log("I only work sometimes for some reason");
+      	var center = new google.maps.LatLng(32.9770911, -117.2448969);
+    		var options = {
+  			'zoom': 10,
+  			'center': center,
+  			'mapTypeId': google.maps.MapTypeId.ROADMAP
+		    };
+
+		var map = new google.maps.Map(document.getElementById("jsmap"), options);
+
+		var markers = [];
+		{{#each locations}}
+  			var latLng = new google.maps.LatLng({{latitude}}, {{longitude}});
+  			var marker = new google.maps.Marker({position: latLng, title:'{{name}}' });
+  			markers.push(marker);
+		{{/each}}
+		var markerCluster = new MarkerClusterer(map, markers);
+     markers.map(function(single){
+    var areaName=single.title;
+      single.addListener('click', function() {
+        
+        renderPie(areaName);
+      });
+    });
+
+ map.addListener('zoom_changed', function() {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+    
+    var zoom = map.getZoom();
+    if(zoom <= 8){
+      window.setTimeout(function() {
+      map.setZoom(10);
+      map.setCenter(center);
+
+    }, 2000);
+    }
+    
+  });
+   
+    
+}
+ function  renderPie(areaName) {
+}
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap"></script>
+  </div>
+
 </body>
 
 <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
