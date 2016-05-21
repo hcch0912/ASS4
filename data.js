@@ -58,12 +58,12 @@ module.exports.getHospitalData=function(req,res){
 	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\""+-target_Y+")^2) "
 
 	var selectNearestHosQuery=
-	" select \"OWNNAM1\","+ disEquation+" from "+hospitalTable+
-	" where "+ disEquation+" =(select MIN( "+disEquation+" )"
+	" select \"OWNNAM1\", "+ disEquation+" from "+hospitalTable+
+	" where "+ disEquation+"=(select MIN( "+disEquation+" )"
 	" from "+hospitalTable+" )";
 	//average distance to hospital
 	var getAvgDisHosQuery=
-	"select AVG ( "+disEquation+" ) from "+hospitalTable; 
+	"select AVG ( " + disEquation+ " ) from "+hospitalTable; 
 
 	pd.connect(conString,function(err,client,done){
 		if(err){
@@ -78,7 +78,15 @@ module.exports.getHospitalData=function(req,res){
 			}else{
 				return res.json({delphidata:"No data present"});
 			}
-		})
+		});
+
+		var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
+			if(res2){
+					return res.json(res2.row);
+			}else{
+				return res.json({delphidata:"No data present"});
+			}
+		});
 	});
 }
 
