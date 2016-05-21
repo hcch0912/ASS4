@@ -6,7 +6,6 @@ var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-
 var app = express();
 var dataEndpoint=require('./data');
 //client id and client secret here, taken from .env (which you need to create)
@@ -30,6 +29,9 @@ app.set('port', process.env.PORT || 3000);
 app.get('/', function(req, res){
   var locationData = require('./locations.json');
   res.render('index', locationData);
+});
+app.get('/map', function(req,res){
+  res.render('map');
 });
 
 
