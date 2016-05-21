@@ -2,9 +2,24 @@ body {
 	background-image: url('../img/bg-splitshire.jpeg');
 	background-size: cover;
 	background-position: 0% 20%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 
+#sidebar {
+	float: left;
+	width: 20vw;
+	height: 100%;
+	background-color: #fff;
+	padding: 0px 10px 0px 10px;
+	overflow: auto;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
 .center {
 	text-align: center;
 	font-family: "Trebuchet MS";
