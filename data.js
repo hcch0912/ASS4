@@ -46,9 +46,24 @@ module.exports.getParkData = function (req,res) {
 		
 }
 
-
+//hospital 
 module.exports.getHospitalData=function(req,res){
 	var inputlocation=req.params.inputlocation;
+
+	//select min distance hospital query
+	var hospitalName;
+	var distance;
+	var target_X;
+	var target_Y;
+	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\""+-target_Y+")^2) "
+
+	var selectNearestHosQuery=
+	" select \"OWNNAM1\","+ disEquation+" from "+hospitalTable+
+	" where "+ disEquation+" =(select MIN( "+disEquation+" )"
+	" from "+hospitalTable+" )";
+	//average distance to hospital
+	var getAvgDisHosQuery=
+	"select AVG ( "+disEquation+" ) from "+hospitalTable; 
 
 	pd.connect(conString,function(err,client,done){
 		if(err){
@@ -56,10 +71,8 @@ module.exports.getHospitalData=function(req,res){
 			console.log(err);
 			return res.status(500).json({success:false,data:err});
 		}
-		var selectHosQuery=
-			"select \"OWNNAM1\" , \"X_COORD\" , \"Y_COORD\" from "+hospitalTable
-			+" where ";
-		var queryHospital=client.query(selectHosQuery,function(err,res1){
+
+		var queryHospital=client.query(selectNearestHosQuery,function(err,res1){
 			if(res1){
 					return res.json(res1.row);
 			}else{
@@ -138,3 +151,5 @@ module.exports.getPoliceData = function (req,res) {
 		});
 		
 }
+
+
