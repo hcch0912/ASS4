@@ -13,7 +13,7 @@ var app = express();
 
 //connect to database
 var conString = process.env.DATABASE_CONNECTION_URL;
-
+var dataEndpoint=require('./data');
 //Configures the Template engine
 app.engine('html', handlebars({ defaultLayout: 'layout', extname: '.html' }));
 app.set("view engine", "html");
