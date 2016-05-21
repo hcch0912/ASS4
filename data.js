@@ -58,7 +58,7 @@ module.exports.getHospitalData=function(req,res){
 	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\""+-target_Y+")^2) "
 
 	var selectNearestHosQuery=
-	" select \"OWNNAM1\", "+ disEquation+" from "+hospitalTable+
+	" select \"OWNNAM1\", "+ disEquation+"AS DIS from "+hospitalTable+
 	" where "+ disEquation+"=(select MIN( "+disEquation+" )"
 	" from "+hospitalTable+" )";
 	//average distance to hospital
