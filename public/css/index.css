@@ -8,6 +8,10 @@ body {
 	padding: 0;
 }
 
+#solosd, {
+  width: 200px;
+  height: 200px;
+}
 #sidebar {
 	float: left;
 	width: 20vw;
