@@ -1,0 +1,246 @@
+{
+	"parks": [
+		{
+			"name": "Guajome County Park",
+			"latitude":	"33.2116506",
+			"longitude": "-117.34336",	
+			"arces": "??",
+			"address": "3000 Guajome Lake Road, Oceanside, CA 92057",
+			"hours": "9:30 - sunset" ,
+			"phone": "(760) 724-4489",
+			"type": "camping",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/GuajomeRegionalPark/GuajomeGrassyArea.jpg"
+		},
+		{
+			"name": "Sweetwater Summit Regional Park",
+			"latitude":	"32.684663",
+			"longitude": "-117.0087691",	
+			"arces": "500",
+			"address": "3218 Summit Meadow Road, Bonita, CA 91902",
+			"hours": "9:30 - sunset" ,
+			"phone": "(619) 472-7572",
+			"type": "camping",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/Sweetwater/SweetwaterReservoir.jpg"
+		},
+		{
+			"name": "Del Dios Highlands Preserve",
+			"latitude":	"33.0843155",
+			"longitude": "-117.1215843",	
+			"arces": "774",
+			"address": "9860 Del Dios Highway, Escondido, CA 92025",
+			"hours": "8am - 1/2 hour before sunset" ,
+			"phone": "(760) 745-4379",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/DelDiosHighlands/DelDiosPreserveView.jpg"
+		},
+				{
+			"name": "Goodan Ranch Sycamore Canyon Preserve",
+			"latitude":	"32.9409013",
+			"longitude": "-116.9851041",	
+			"arces": "2,272",
+			"address": "16281 Sycamore Canyon Road, Poway, CA 92064",
+			"hours": "Varies" ,
+			"phone": "(858) 513-4737",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/GoodanSycamore/SycamoreCanyon3.jpg"
+		},
+				{
+			"name": "Hellhole Canyon Preserve",
+			"latitude":	"33.2454896",
+			"longitude": "-116.9226674",	
+			"arces": "1,907",
+			"address": "19324 Santee Lane, Center, CA 92082",
+			"hours": "8 a.m. - sunset, Friday - Monday" ,
+			"phone": "(760) 742-1631",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/openspace/hellhole/_jcr_content/par/image_0.img.jpg/1406322722442.jpg"
+		},
+				{
+			"name": "Los Peñasquitos Canyon Preserve",
+			"latitude":	"32.9373448",
+			"longitude": "-117.1337133",	
+			"arces": "3,700",
+			"address": "12122 Canyonside Park Road, San Diego, CA 92129",
+			"hours": "8am - sunset" ,
+			"phone": "(858) 484-7504",
+			"type": "Open Space Preserve",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/LosPenasquitos/PQWaterfall.jpg"
+		},
+				{
+			"name": "Luelf Pond Preserve",
+			"latitude":	"32.9941918",
+			"longitude": "-116.9000938",	
+			"arces": "87.91",
+			"address": "3000 Duck Pond Lane, Ramona, CA 92065",
+			"hours": "8am - sunset" ,
+			"phone": "(760) 788-3326",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/openspace/luelfpond/_jcr_content/par/image_1.img.jpg/1406324041390.jpg"
+		},
+				{
+			"name": "Lusardi Creek Preserve",
+			"latitude":	"33.0138645",
+			"longitude": "-117.1624902",	
+			"arces": "??",
+			"address": "16500 Rio Vista Rd, San Diego, CA 92127",
+			"hours": "8am - sunset" ,
+			"phone": "(858) 673-3990",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/openspace/lusardicreek/_jcr_content/par/image_0.img.jpg/1406324842427.jpg"
+		},
+				{
+			"name": "Mission Trails Regional Park",
+			"latitude":	"32.8179565",
+			"longitude": "-117.0581987",	
+			"arces": "7,220",
+			"address": "One Father Junipero Serra Tr., San Diego, CA 92119",
+			"hours": "9am - 5pm" ,
+			"phone": "(619) 668-3281",
+			"type": "Open Space Preserves",
+			"img": "https://res.cloudinary.com/roadtrippers/image/upload/c_fill,h_316,w_520/v1374510387/mission-trails-regional-park-51ed5bd3d3bf7e4a23000208.jpg"
+		},
+				{
+			"name": "Mt. Gower Preserve",
+			"latitude":	"33.0248435",
+			"longitude": "-116.7991087",	
+			"arces": "1574",
+			"address": "17090 Gunn Stage Road, Ramona, CA 92065",
+			"hours": "8am - sunset" ,
+			"phone": "(760) 788-3326",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/openspace/Mt_Gower/_jcr_content/par/image_0.img.jpg/1406326744805.jpg"
+		},
+				{
+			"name": "Oakoasis Preserve",
+			"latitude":	"32.9162313",
+			"longitude": "-116.8976398",	
+			"arces": "397",
+			"address": "12620 Wildcat Canyon Rd, Lakeside, CA 92040",
+			"hours": "8am - sunset, daily" ,
+			"phone": "(619) 561-0580",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/openspace/oakoasis/_jcr_content/par/image.img.jpg/1406327180518.jpg"
+		},
+				{
+			"name": "Otay Valley Regional Park",
+			"latitude":	"32.5897684",
+			"longitude": "-117.0654152",	
+			"arces": "200",
+			"address": "2155 E. Beyer Blvd, San Diego, CA 92154",
+			"hours": "9:30 - sunset. daily" ,
+			"phone": "(619) 424-0463",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/OVRP/OVRPMustardField.jpg"
+		},
+				{
+			"name": "San Elijo Lagoon Ecological Reserve",
+			"latitude":	"33.0140629",
+			"longitude": "-117.2551032",	
+			"arces": "??",
+			"address": "2710 Manchester Avenue, Cardiff-by-the-Sea, CA 92007",
+			"hours": "9am - sunset" ,
+			"phone": "(760) 634-3026",
+			"type": "Open Space Preserves",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/SanElijoLagoon/SanElijoView3.jpg"
+		},
+				{
+			"name": "Tijuana River Valley Regional Park",
+			"latitude":	"32.5521263",
+			"longitude": "-117.0930829",	
+			"arces": "More than 1,800 Acres",
+			"address": "2721 Monument Road, San Diego, CA 92154",
+			"hours": "8am - sunset" ,
+			"phone": "(619) 428-2946",
+			"type": "Open Space Preserves/Sports Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/TijuanaRiverValley/TJRVDairyMartBoardwalk.jpg"
+		},
+				{
+			"name": "4S Ranch Sports Park",
+			"latitude":	"33.0037963",
+			"longitude": "-117.1183713",	
+			"arces": "25",
+			"address": "16118D 4S Ranch Parkway, San Diego, CA 92127",
+			"hours": "7am - 10pm. daily" ,
+			"phone": "(858) 673-3900",
+			"type": "Sports Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/4SRanch/Outdoor_BasketballWEB.jpg"
+		},
+				{
+			"name": "San Dieguito County Park",
+			"latitude":	"32.9990252",
+			"longitude": "-117.2359953",	
+			"arces": "125",
+			"address": "1628 Lomas Santa Fe Drive, Del Mar, CA 92014",
+			"hours": "9:30 - sunset. daily" ,
+			"phone": "(858) 755-2386",
+			"type": "Sports Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/SanDieguito/SanDieguitoPond.jpg"
+		},
+				{
+			"name": "Eucalyptus County Park",
+			"latitude":	"32.7600122",
+			"longitude": "-117.0032823",	
+			"arces": "6.45",
+			"address": "9125 Edgewood Drive, Spring Valley, CA 91977",
+			"hours": "Sunrise - sunset" ,
+			"phone": "(877) 565-3600",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/picnic/eucalyptus/_jcr_content/par/image_0.img.jpg/1405453043247.jpg"
+		},
+				{
+			"name": "Felicita County Park",
+			"latitude":	"33.0815582",
+			"longitude": "-117.0867454",	
+			"arces": "??",
+			"address": "742 Clarence Lane, Escondido, CA 92025, ThomBros: 1149-J1",
+			"hours": "9:30 - sunset. daily" ,
+			"phone": "(760) 745-4379",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/Felicita/FelicitaCreek.jpg"
+		},
+				{
+			"name": "Flinn Springs County Park",
+			"latitude":	"32.8472875",
+			"longitude": "-116.8624047",	
+			"arces": "95",
+			"address": "14787 Old Hwy. 80, El Cajon, CA 92021, ThomBros: 1232-J4",
+			"hours": "9:30 - sunset. daily" ,
+			"phone": "(619) 561-0180",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/FlinnSprings/FlinnSpringsOpenPavilion.jpg"
+		},
+				{
+			"name": "Lamar County Park",
+			"latitude":	"32.7404763",
+			"longitude": "-117.009137",	
+			"arces": "8.89",
+			"address": "3180 Bancroft Dr, Spring Valley, CA 91977",
+			"hours": "Sunrise - sunset. daily" ,
+			"phone": "???",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/LamarCountyPark/LamarPlayground2.jpg"
+		},
+				{
+			"name": "Otay Lakes County Park",
+			"latitude":	"32.6167708",
+			"longitude": "-116.9358468",	
+			"arces": "78",
+			"address": "2270 Wueste Road, Chula Vista, CA 91915",
+			"hours": "9:30am - sunset. daily" ,
+			"phone": "(619) 482-7361",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/dam/sdc/parks/OtayLakeCountyPark/OtayLake.jpg"
+		},
+				{
+			"name": "Palomar County Park",
+			"latitude":	"33.3114981",
+			"longitude": "-116.8589983",	
+			"arces": "4",
+			"address": "21818 Crestline Rd, Palomar Mountain, CA 92060",
+			"hours": "Sunrise-sunset. Friday - Monday" ,
+			"phone": "(760) 724-1631",
+			"type": "Day Use Park",
+			"img": "http://www.sandiegocounty.gov/content/sdc/parks/picnic/palomar/_jcr_content/par/image.img.jpg/1405630184060.jpg" 
+		}
+	]
+}
