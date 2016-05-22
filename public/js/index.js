@@ -1,5 +1,18 @@
 $(document).ready( function () {
   $('#dragme').draggable();
+
+  $('#toHelp').click(function(e) {
+    e.preventDefault();
+    $('#help').css('margin-left','0px');
+    $('#main').css('margin-left','-1250px');
+  });
+
+  $('#toHome').click(function(e) {
+    e.preventDefault();
+    $('#main').css('margin-left','0px');
+    $('#help').css('margin-left','1250px');
+  });
+
 });
 
 
