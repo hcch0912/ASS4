@@ -1,0 +1,21 @@
+#dragme { 
+  position: absolute;
+  left: 20;
+  top: 20; /* set these so Chrome doesn't return 'auto' from getComputedStyle */
+  width: 250px; 
+  background: #ffffff; 
+  border: 2px  solid #000000; 
+  border-radius: 4px; 
+  padding: 8px;
+}
+
+
+#solosd {
+  
+}
+
+#logo{
+	width: 200px;
+	height: 200px;
+	align: center;
+}

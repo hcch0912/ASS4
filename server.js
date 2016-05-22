@@ -6,12 +6,15 @@ var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-
+var dotenv = require('dotenv');
+var pg = require('pg');
 var app = express();
-var dataEndpoint=require('./data');
+
 //client id and client secret here, taken from .env (which you need to create)
 
-
+//connect to database
+var conString = process.env.DATABASE_CONNECTION_URL;
+var dataEndpoint=require('./data');
 //Configures the Template engine
 app.engine('html', handlebars({ defaultLayout: 'layout', extname: '.html' }));
 app.set("view engine", "html");
@@ -31,13 +34,15 @@ app.get('/', function(req, res){
   var locationData = require('./locations.json');
   res.render('index', locationData);
 });
+app.get('/map', function(req,res){
+  res.render('map');
+});
 
-
-//get data
 app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
-
+  
 app.get('/delphidata/population/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPopulationData);
 app.get('/delphidata/police/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPoliceData);
+
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
