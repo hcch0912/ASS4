@@ -2,6 +2,28 @@ $(document).ready( function () {
   $('#dragme').draggable();
 });
 
+
+function getNearestHospital(inputlocation){
+	var results="";
+	d3.json("/delphidata/hospital/"+inputlocation, function(err, resData) {
+		//response is json{name:"",dis:""};
+	console.log(inputlocation+"in index.js")
+	 if(err){
+	 	console.log(err);
+	 }
+	 if(resData){
+	  console.log(resData);
+	  var hospitalName=resData[].OWNNAM1;
+	  var distance=resData[].dis;
+	 
+
+	 }
+
+	  return results;
+
+	});
+	}
+
 /*
 // get user input 
 function useData(inputlocation){
@@ -20,6 +42,7 @@ console.log("hello1");
   return results;
 
 });
+
 
  d3.json("/delphidata/hospital/"+inputlocation, function(err, resData) {
 
