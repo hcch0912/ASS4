@@ -166,4 +166,12 @@ module.exports.getPoliceData = function (req,res) {
 		
 }
 
+/*
+ select "OWNNAM1",  
+ sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) AS DIS
+  from cogs121_16_raw.sandag_hospitals_point_prj 
+   where sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) =
+   (select MIN(  sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) )
+     from cogs121_16_raw.sandag_hospitals_point_prj)
+*/
 

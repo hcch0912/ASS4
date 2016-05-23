@@ -1,23 +1,64 @@
-<!doctype html>
-<html>
-<head>
-  <title>HELP</title>	
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/map.css"></head>
-</head>
 
-<body>
-    
+
 	<div id="dragme">
 		<div id="solosd"> <img id="logo" src="imgs/solo.png"> </div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script src="/js/index.js"></script>
-    <script src="/js/d3.min.js"></script>
-</body>
-</html>
 
+	<div id="map">
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js">			
+		</script>
+		<script type="text/javascript" src="./js/index.js"> 
+
+		</script>
+
+	  	<script>
+	          function initMap() {
+	            	console.log("I only work sometimes for some reason");
+	            	var center = new google.maps.LatLng(32.9770911, -117.2448969);
+	          		var options = {
+	        			'zoom': 10,
+	        			'center': center,
+	        			'mapTypeId': google.maps.MapTypeId.ROADMAP
+	      		    };
+
+	      		var map = new google.maps.Map(document.getElementById("map"), options);
+
+	      		var markers = [];
+	      		{{#each parks}}
+	        			var latLng = new google.maps.LatLng({{latitude}}, {{longitude}});
+	        			var marker = new google.maps.Marker({position: latLng, title:'{{name}}' });
+	        			markers.push(marker);
+	      		{{/each}}
+	      		var markerCluster = new MarkerClusterer(map, markers);
+	          	markers.map(function(single){
+		        var areaName=single.title;
+		            single.addListener('click', function() {
+		            	//call get nearest hospital function
+		              getNearestHospital(areaName);
+		            });
+		          });
+
+	       map.addListener('zoom_changed', function() {
+	          // 3 seconds after the center of the map has changed, pan back to the
+	          // marker.
+	          
+	          var zoom = map.getZoom();
+	          if(zoom <= 8){
+	            window.setTimeout(function() {
+	            map.setZoom(10);
+	            map.setCenter(center);
+
+	          }, 2000);
+	          }
+	          
+	        });
+	         
+	          
+	      }
+	    </script>
+	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap">
+	    
+	    </script>
+ 	 </div>
 
 

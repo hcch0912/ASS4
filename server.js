@@ -31,11 +31,14 @@ app.set('port', process.env.PORT || 3000);
 
 //routes
 app.get('/', function(req, res){
-  var locationData = require('./locations.json');
-  res.render('index', locationData);
+  
+  res.render('index');
 });
+//render map page with parks location info 
 app.get('/map', function(req,res){
-  res.render('map');
+	var locationData = require('./parks.json');
+	console.log("in server "+locationData);
+  	res.render('map',locationData);
 });
 
 app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);

@@ -1,3 +1,5 @@
+var map;
+
 $(document).ready( function () {
   $('#dragme').draggable();
 
@@ -13,6 +15,31 @@ $(document).ready( function () {
     $('#help').css('margin-left','1250px');
   });
 
+$("button").click(function() {
+        console.log(this.value);
+        $('.chart').empty();
+        renderPie(this.value);
+    });
+
+  $('li').click(function(){
+    var tab_id = $(this).attr('data-tab');
+
+    $('li').removeClass('curr-tab');
+    $('.tab-content').removeClass('current');
+
+    $(this).addClass('curr-tab');
+    $("#"+tab_id).addClass('current');
+  });
+
+  $('.list').click(function(){
+    var name = $(this).text();
+    console.log(name);
+    
+    renderPie("Carlsbad");
+    $('#current-title').html(name);
+    $( ".tab-link" ).trigger( "click" );
+  });
+
 });
 
 
@@ -26,9 +53,8 @@ function getNearestHospital(inputlocation){
 	 }
 	 if(resData){
 	  console.log(resData);
-	  var hospitalName=resData[].OWNNAM1;
-	  var distance=resData[].dis;
-	 
+	  var hospitalName=resData[0].OWNNAM1;
+	  var distance=resData[0].dis;
 
 	 }
 
