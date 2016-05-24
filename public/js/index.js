@@ -19,14 +19,13 @@ $(document).ready( function () {
 });
 
 
-function getNearestHospital(lati,long){
-	
-  // var lati=31.11;
-  // var long=-117.9342;
-  var data={};
-  data.lati=lati;
-  data.long=long;
+function getNearestHospital(lat,lng){
 
+  var data={};
+  data.lat=lat;
+  data.lng=lng;
+
+  console.log("in index js"+lat+lng)
   var results={};
 
    $.ajax({
@@ -36,8 +35,9 @@ function getNearestHospital(lati,long){
             contentType: 'application/json',
             url: 'http://localhost:3000/delphidata/hospital',            
             success: function(data) {
-                    results.name=data.OWNNAM1;
-                    results.distance=data.dis;
+                    results.name=data[0].OWNNAM1;
+                    results.distance=data[0].dis;
+                    console.log("in response"+results.name+results.distance);
              }
    });
 	  return results;

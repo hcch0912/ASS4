@@ -1,17 +1,7 @@
 
-	 
-		
-		
 	<div id="dragme">
 		<div id="solosd"> <img id="logo" src="imgs/solo.png"> </div>
 	</div>
-
-			<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-		<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-		<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-
-		<!-- Example data. -->
-		
 
 		<div id='map'></div>
 
@@ -31,7 +21,17 @@
 		        });
 		        marker.bindPopup(title);
 		        markers.addLayer(marker);
+		        marker.on('click', function() {
+				console.log(marker._latlng.lat,marker._latlng.lng);
+              	getNearestHospital(marker._latlng.lat,marker._latlng.lng);
+            });
 		    {{/each}}
-
 		    map.addLayer(markers);
+
+			marker.on('click', function() {
+				console.log(markers._latlng.lat,markers._latlng.lng);
+              	var results=getNearestHospital(markers._latlng.lat,markers._latlng.lng);
+              	console.log(results);
+            });
+		
 		</script>

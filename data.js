@@ -49,17 +49,13 @@ module.exports.getParkData = function (req,res) {
 //hospital 
 module.exports.getHospitalData=function(req,res){
 
-	
 
-	// console.log(req+"here in data");
-	// console.log(req.params+"pppppppp")
-	// console.log(req.params.lati+"aaaaa");
-	// console.log(req.body.lati+"bbbbbbbb");
+	
 	//select min distance hospital query
 	var hospitalName;
 	var distance;
-	var target_X=req.body.lati;
-	var target_Y=req.body.long;
+	var target_X=req.body.lat;
+	var target_Y=req.body.lng;
 	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\"-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
@@ -86,7 +82,7 @@ module.exports.getHospitalData=function(req,res){
 				console.log(res1.rows);
 					return res.json(res1.rows);
 			}
-				//return res.json({delphidata:"No data present"});
+			//return res.json({delphidata:"No data present"});
 			
 		});
 
