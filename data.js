@@ -47,13 +47,8 @@ module.exports.getParkData = function (req,res) {
 }
 
 //hospital 
-module.exports.getHospitalData=function(req,res){
-
-
-	
+module.exports.getNearestHospitalData=function(req,res){
 	//select min distance hospital query
-	var hospitalName;
-	var distance;
 	var target_X=req.body.lat;
 	var target_Y=req.body.lng;
 	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\"-("+target_Y+"))^2) "
@@ -63,10 +58,10 @@ module.exports.getHospitalData=function(req,res){
 	" where "+ disEquation+"=(select MIN( "+disEquation+" )"+
 	" from "+hospitalTable+" )";
 	//average distance to hospital
+
 	var getAvgDisHosQuery=
 	"select AVG ( " + disEquation+ " ) from "+hospitalTable; 
 
-	console.log("aaa"+selectNearestHosQuery);
 
 	pg.connect(conString,function(err,client,done){
 		if(err){
@@ -79,23 +74,20 @@ module.exports.getHospitalData=function(req,res){
 				console.log(err);
 			}
 			if(res1){
-				console.log(res1.rows);
-					return res.json(res1.rows);
+					var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
+						if(res2){
+							console.log(res2.rows+res1.rows+"in res2");
+								return res.json({nearest:res1.rows,avgDis:res2.rows});
+						}else{
+							return res.json({delphidata:"No data present hospital"});
+						}
+					});
+							
 			}
-			//return res.json({delphidata:"No data present"});
-			
 		});
 
-		// var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
-		// 	if(res2){
-		// 			return res.json(res2.row);
-		// 	}else{
-		// 		return res.json({delphidata:"No data present hospital"});
-		// 	}
-		// });
 	});
 }
-
 
 module.exports.getPopulationData = function (req,res) {
 

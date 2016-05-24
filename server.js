@@ -46,8 +46,8 @@ app.get('/delphidata/park/:lati(\\d*\.\d*)/:long(\-\d*\.\d*)',dataEndpoint.getPa
 app.get('/delphidata/population/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPopulationData);
 app.get('/delphidata/police/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPoliceData);
 
-app.get('/delphidata/hospital',dataEndpoint.getHospitalData);
-app.post('/delphidata/hospital',dataEndpoint.getHospitalData);
+app.get('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
+app.post('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });

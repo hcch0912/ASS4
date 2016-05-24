@@ -35,9 +35,10 @@ function getNearestHospital(lat,lng){
             contentType: 'application/json',
             url: 'http://localhost:3000/delphidata/hospital',            
             success: function(data) {
-                    results.name=data[0].OWNNAM1;
-                    results.distance=data[0].dis;
-                    console.log("in response"+results.name+results.distance);
+                    results.name=data.nearest[0].OWNNAM1;
+                    results.distance=data.nearest[0].dis;
+                    results.avg=data.avgDis[0].avg;
+                    console.log("in response"+results.name+results.distance+results.avg);
              }
    });
 	  return results;
