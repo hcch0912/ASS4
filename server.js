@@ -31,19 +31,23 @@ app.set('port', process.env.PORT || 3000);
 
 //routes
 app.get('/', function(req, res){
-  var locationData = require('./locations.json');
-  res.render('index', locationData);
-});
-app.get('/map', function(req,res){
-  res.render('map');
-});
-
-app.get('/delphidata/park/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getParkData);
   
-app.get('/delphidata/population/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPopulationData);
-app.get('/delphidata/police/:inputlocation([A-Za-z0-9]*)',dataEndpoint.getPoliceData);
+  res.render('index');
+});
+//render map page with parks location info 
+app.get('/map', function(req,res){
+	var locationData = require('./parks.json');
 
+  	res.render('map',locationData);
+});
 
+app.get('/delphidata/park/:lati(\\d*\.\d*)/:long(\-\d*\.\d*)',dataEndpoint.getParkData);
+  
+app.get('/delphidata/population/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPopulationData);
+app.get('/delphidata/police/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPoliceData);
+
+app.get('/delphidata/hospital',dataEndpoint.getHospitalData);
+app.post('/delphidata/hospital',dataEndpoint.getHospitalData);
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });

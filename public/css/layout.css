@@ -1,0 +1,11 @@
+#map {
+  width: 400px;
+  height: 400px;
+  background-image: url("http://maps.googleapis.com/maps/api/staticmap?center=SanDiego&size=640x640&scale=2&style=element:labels|visibility:on&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyC-ei_b2CWVhDAm0LGgJqthcUCWJ-Kiy9s");
+}
+
+html, body {
+  height: 50%;
+  margin: 0;
+  padding: 0;
+}

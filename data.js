@@ -48,45 +48,51 @@ module.exports.getParkData = function (req,res) {
 
 //hospital 
 module.exports.getHospitalData=function(req,res){
-	var inputlocation=req.params.inputlocation;
 
+
+	
 	//select min distance hospital query
 	var hospitalName;
 	var distance;
-	var target_X;
-	var target_Y;
-	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\""+-target_Y+")^2) "
+	var target_X=req.body.lat;
+	var target_Y=req.body.lng;
+	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\"-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
 	" select \"OWNNAM1\", "+ disEquation+"AS DIS from "+hospitalTable+
-	" where "+ disEquation+"=(select MIN( "+disEquation+" )"
+	" where "+ disEquation+"=(select MIN( "+disEquation+" )"+
 	" from "+hospitalTable+" )";
 	//average distance to hospital
 	var getAvgDisHosQuery=
 	"select AVG ( " + disEquation+ " ) from "+hospitalTable; 
 
-	pd.connect(conString,function(err,client,done){
+	console.log("aaa"+selectNearestHosQuery);
+
+	pg.connect(conString,function(err,client,done){
 		if(err){
 			done();
 			console.log(err);
 			return res.status(500).json({success:false,data:err});
 		}
-
 		var queryHospital=client.query(selectNearestHosQuery,function(err,res1){
-			if(res1){
-					return res.json(res1.row);
-			}else{
-				return res.json({delphidata:"No data present"});
+			if(err){
+				console.log(err);
 			}
+			if(res1){
+				console.log(res1.rows);
+					return res.json(res1.rows);
+			}
+			//return res.json({delphidata:"No data present"});
+			
 		});
 
-		var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
-			if(res2){
-					return res.json(res2.row);
-			}else{
-				return res.json({delphidata:"No data present"});
-			}
-		});
+		// var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
+		// 	if(res2){
+		// 			return res.json(res2.row);
+		// 	}else{
+		// 		return res.json({delphidata:"No data present hospital"});
+		// 	}
+		// });
 	});
 }
 
@@ -141,7 +147,7 @@ module.exports.getPoliceData = function (req,res) {
 	        //Query Park data
 	        var selectPoliceQuery=
 	        	"select  "
-	        	+" from "+policeTables
+	        	+" from "+policeTable
 	        	+" where ";
 	        var queryPolice = client.query(selectPoliceQuery,function(err,res1){
 	        	
@@ -160,4 +166,12 @@ module.exports.getPoliceData = function (req,res) {
 		
 }
 
+/*
+ select "OWNNAM1",  
+ sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) AS DIS
+  from cogs121_16_raw.sandag_hospitals_point_prj 
+   where sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) =
+   (select MIN(  sqrt(("X_COORD"-10.1)^2+("Y_COORD"-10.2)^2) )
+     from cogs121_16_raw.sandag_hospitals_point_prj)
+*/
 

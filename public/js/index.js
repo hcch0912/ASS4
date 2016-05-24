@@ -1,3 +1,5 @@
+var map;
+
 $(document).ready( function () {
 
   $('#toHelp').click(function(e) {
@@ -12,7 +14,34 @@ $(document).ready( function () {
     $('#help').css('margin-left','1250px');
   });
 
+
 });
+
+
+function getNearestHospital(lat,lng){
+
+  var data={};
+  data.lat=lat;
+  data.lng=lng;
+
+  console.log("in index js"+lat+lng)
+  var results={};
+
+   $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:3000/delphidata/hospital',            
+            success: function(data) {
+                    results.name=data[0].OWNNAM1;
+                    results.distance=data[0].dis;
+                    console.log("in response"+results.name+results.distance);
+             }
+   });
+	  return results;
+	
+	}
 
 /*
 // get user input 
@@ -32,6 +61,7 @@ console.log("hello1");
   return results;
 
 });
+
 
  d3.json("/delphidata/hospital/"+inputlocation, function(err, resData) {
 
