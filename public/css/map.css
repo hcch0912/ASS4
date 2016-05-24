@@ -2,14 +2,61 @@
   position: absolute;
   left: 20;
   top: 20; /* set these so Chrome doesn't return 'auto' from getComputedStyle */
-  width: 250px; 
+  width: 225px; 
   background: #ffffff; 
-  border: 2px  solid #000000; 
+  border: 2px  solid #dddddd; 
   border-radius: 4px; 
-  padding: 8px;
+  padding: 8px 8px 16px 8px;
+  text-align: center;
 }
 
 
 #solosd {
-  
+	font-family: "Trebuchet MS";
+	color: #cccccc;
+	font-size: 35px;
+	margin-top: 10px;
+	margin-bottom: -5px;
+}
+
+#solosd b {
+	color: #66d9ef;
+}
+
+#credits {
+	font-family: 'Trebuchet MS';
+	font-size: 9px;
+	color: #dddddd;
+}
+
+.border {
+	width: 70px;
+	background-color: #dddddd;
+	height: 1px;
+	line-height: 1px;
+	overflow: hidden;
+	margin: 20px auto;
+}
+
+h2 {
+	font-family: "Trebuchet MS";
+	color: #cccccc;
+	font-size: 25px;
+	font-weight: normal;
+	padding: 0px;
+	margin: 10px 0px 10px 40px;
+	text-align: left;
+}
+
+form {
+	text-align: left;
+	font-family: 'Consolas';
+	font-size: 12px;
+	line-height: 15px;
+	margin-left: 40px;
+}
+
+.desc {
+	line-height: 10px;
+	vertical-align: text-top;
 }

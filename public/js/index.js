@@ -1,5 +1,4 @@
 $(document).ready( function () {
-  $('#dragme').draggable();
 
   $('#toHelp').click(function(e) {
     e.preventDefault();
