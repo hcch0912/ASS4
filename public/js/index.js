@@ -15,52 +15,33 @@ $(document).ready( function () {
     $('#help').css('margin-left','1250px');
   });
 
-$("button").click(function() {
-        console.log(this.value);
-        $('.chart').empty();
-        renderPie(this.value);
-    });
-
-  $('li').click(function(){
-    var tab_id = $(this).attr('data-tab');
-
-    $('li').removeClass('curr-tab');
-    $('.tab-content').removeClass('current');
-
-    $(this).addClass('curr-tab');
-    $("#"+tab_id).addClass('current');
-  });
-
-  $('.list').click(function(){
-    var name = $(this).text();
-    console.log(name);
-    
-    renderPie("Carlsbad");
-    $('#current-title').html(name);
-    $( ".tab-link" ).trigger( "click" );
-  });
 
 });
 
 
-function getNearestHospital(inputlocation){
-	var results="";
-	d3.json("/delphidata/hospital/"+inputlocation, function(err, resData) {
-		//response is json{name:"",dis:""};
-	console.log(inputlocation+"in index.js")
-	 if(err){
-	 	console.log(err);
-	 }
-	 if(resData){
-	  console.log(resData);
-	  var hospitalName=resData[0].OWNNAM1;
-	  var distance=resData[0].dis;
+function getNearestHospital(lati,long){
+	
+  // var lati=31.11;
+  // var long=-117.9342;
+  var data={};
+  data.lati=lati;
+  data.long=long;
 
-	 }
+  var results={};
 
+   $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:3000/delphidata/hospital',            
+            success: function(data) {
+                    results.name=data.OWNNAM1;
+                    results.distance=data.dis;
+             }
+   });
 	  return results;
-
-	});
+	
 	}
 
 /*

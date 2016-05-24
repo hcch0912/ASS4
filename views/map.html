@@ -1,14 +1,13 @@
 
-
+	 
+		
+		
 	<div id="dragme">
 		<div id="solosd"> <img id="logo" src="imgs/solo.png"> </div>
 	</div>
 
 	<div id="map">
 		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js">			
-		</script>
-		<script type="text/javascript" src="./js/index.js"> 
-
 		</script>
 
 	  	<script>
@@ -26,15 +25,18 @@
 	      		var markers = [];
 	      		{{#each parks}}
 	        			var latLng = new google.maps.LatLng({{latitude}}, {{longitude}});
-	        			var marker = new google.maps.Marker({position: latLng, title:'{{name}}' });
+	        			var marker = new google.maps.Marker({position: latLng,title:'{{name}}' ,long:'{{longitude}}',lati:'{{latitude}}'});
 	        			markers.push(marker);
+	        			
 	      		{{/each}}
 	      		var markerCluster = new MarkerClusterer(map, markers);
+
 	          	markers.map(function(single){
-		        var areaName=single.title;
+		        
+		        console.log(lati);
 		            single.addListener('click', function() {
 		            	//call get nearest hospital function
-		              getNearestHospital(areaName);
+		              getNearestHospital(single.lati,single.long);
 		            });
 		          });
 

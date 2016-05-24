@@ -48,15 +48,19 @@ module.exports.getParkData = function (req,res) {
 
 //hospital 
 module.exports.getHospitalData=function(req,res){
-	var inputlocation=req.params.inputlocation;
 
-	console.log(inputlocation+"in data.js");
+	
+
+	// console.log(req+"here in data");
+	// console.log(req.params+"pppppppp")
+	// console.log(req.params.lati+"aaaaa");
+	// console.log(req.body.lati+"bbbbbbbb");
 	//select min distance hospital query
 	var hospitalName;
 	var distance;
-	var target_X=10.1;
-	var target_Y=10.2;
-	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\""+-target_Y+")^2) "
+	var target_X=req.body.lati;
+	var target_Y=req.body.long;
+	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\"-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
 	" select \"OWNNAM1\", "+ disEquation+"AS DIS from "+hospitalTable+
