@@ -6,61 +6,32 @@
 		<div id="solosd"> <img id="logo" src="imgs/solo.png"> </div>
 	</div>
 
-	<div id="map">
-		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js">			
+			<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+		<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+		<!-- Example data. -->
+		
+
+		<div id='map'></div>
+
+		<script>
+		L.mapbox.accessToken = 'pk.eyJ1IjoidnJuYyIsImEiOiJjaW85a2E1dG4wMzZrdnBrajFqZHV3aTYwIn0.BVUSKwO5hVenIwMkR-_DrA';
+		    var map = L.mapbox.map('map', 'mapbox.streets')
+		        .setView([32.9770911, -117.2448969], 9);
+
+		    var markers = new L.MarkerClusterGroup();
+		    
+		    {{#each parks}}
+		        console.log('{{name}}');
+		        var title = '{{name}}';
+		        var marker = L.marker(new L.LatLng({{latitude}}, {{longitude}}), {
+		            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
+		            title: title
+		        });
+		        marker.bindPopup(title);
+		        markers.addLayer(marker);
+		    {{/each}}
+
+		    map.addLayer(markers);
 		</script>
-
-	  	<script>
-	          function initMap() {
-	            	console.log("I only work sometimes for some reason");
-	            	var center = new google.maps.LatLng(32.9770911, -117.2448969);
-	          		var options = {
-	        			'zoom': 10,
-	        			'center': center,
-	        			'mapTypeId': google.maps.MapTypeId.ROADMAP
-	      		    };
-
-	      		var map = new google.maps.Map(document.getElementById("map"), options);
-
-	      		var markers = [];
-	      		{{#each parks}}
-	        			var latLng = new google.maps.LatLng({{latitude}}, {{longitude}});
-	        			var marker = new google.maps.Marker({position: latLng,title:'{{name}}' ,long:'{{longitude}}',lati:'{{latitude}}'});
-	        			markers.push(marker);
-	        			
-	      		{{/each}}
-	      		var markerCluster = new MarkerClusterer(map, markers);
-
-	          	markers.map(function(single){
-		        
-		        console.log(lati);
-		            single.addListener('click', function() {
-		            	//call get nearest hospital function
-		              getNearestHospital(single.lati,single.long);
-		            });
-		          });
-
-	       map.addListener('zoom_changed', function() {
-	          // 3 seconds after the center of the map has changed, pan back to the
-	          // marker.
-	          
-	          var zoom = map.getZoom();
-	          if(zoom <= 8){
-	            window.setTimeout(function() {
-	            map.setZoom(10);
-	            map.setCenter(center);
-
-	          }, 2000);
-	          }
-	          
-	        });
-	         
-	          
-	      }
-	    </script>
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASG2S-WOZs34FgorPUaLA1xyUmCE0pE_Q&callback=initMap">
-	    
-	    </script>
- 	 </div>
-
-

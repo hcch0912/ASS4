@@ -37,7 +37,7 @@ app.get('/', function(req, res){
 //render map page with parks location info 
 app.get('/map', function(req,res){
 	var locationData = require('./parks.json');
-	console.log("in server "+locationData);
+
   	res.render('map',locationData);
 });
 
