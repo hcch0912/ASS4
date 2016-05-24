@@ -51,7 +51,7 @@ module.exports.getNearestHospitalData=function(req,res){
 	//select min distance hospital query
 	var target_X=req.body.lat;
 	var target_Y=req.body.lng;
-	var disEquation=" sqrt((\"X_COORD\"-"+ target_X +")^2+(\"Y_COORD\"-("+target_Y+"))^2) "
+	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
 	" select \"OWNNAM1\", "+ disEquation+"AS DIS from "+hospitalTable+
@@ -61,7 +61,6 @@ module.exports.getNearestHospitalData=function(req,res){
 
 	var getAvgDisHosQuery=
 	"select AVG ( " + disEquation+ " ) from "+hospitalTable; 
-
 
 	pg.connect(conString,function(err,client,done){
 		if(err){
@@ -77,7 +76,7 @@ module.exports.getNearestHospitalData=function(req,res){
 					var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
 						if(res2){
 							
-								return res.json({nearest:res1.rows,avgDis:res2.rows});
+							return res.json({nearest:res1.rows,avgDis:res2.rows});
 						}else{
 							return res.json({delphidata:"No data present hospital"});
 						}
