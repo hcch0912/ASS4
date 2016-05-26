@@ -1,5 +1,6 @@
 $(document).ready( function () {
 	var closed = false;
+	var scrolled = false;
 
 	$('#dragme').draggable();
 	$('#infome').draggable();
@@ -15,6 +16,23 @@ $(document).ready( function () {
 			$('#dragme').css('height','auto');
 			$('#dragme').css('width','auto');
 			closed=false;
+		}
+	});
+
+	$('#scrollhere').click( function(){
+		if( !scrolled ){
+			$('#statspage').css('margin-top','0px');
+			$('#scrollhere').text("go back to map");
+			$('#dragme').css('opacity','0');
+			$('#infome').css('opacity','0');
+			scrolled = true;
+		}
+		else {
+			$('#statspage').css('margin-top','50%');
+			$('#scrollhere').text("click here for more information");
+			$('#dragme').css('opacity','1');
+			$('#infome').css('opacity','1');
+			scrolled = false;
 		}
 	});
 });
