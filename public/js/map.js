@@ -28,8 +28,8 @@ $(document).ready( function () {
 			scrolled = true;
 		}
 		else {
-			$('#statspage').css('margin-top','50%');
-			$('#scrollhere').text("click here for more information");
+			$('#statspage').css('margin-top','80%');
+			$('#scrollhere').text("view saved locations");
 			$('#dragme').css('opacity','1');
 			$('#infome').css('opacity','1');
 			scrolled = false;
