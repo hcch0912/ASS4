@@ -18,7 +18,7 @@ $(document).ready( function () {
 });
 
 
-function getNearestHospital(lat,lng,callback){
+function getNearestHospital(lat,lng){
 
   var data={};
   data.lat=lat;

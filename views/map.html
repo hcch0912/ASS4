@@ -82,23 +82,30 @@
 		        .setView([32.9770911, -117.2448969], 9);
 
 		    var markers = new L.MarkerClusterGroup();
-		    
+		    var markerList=[];
 		    {{#each parks}}
-		        console.log('{{name}}');
+		        
 		        var title = '{{name}}';
 		        var marker = L.marker(new L.LatLng({{latitude}}, {{longitude}}), {
 		            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
 		            title: title
 		        });
 		        marker.bindPopup(title);
-		        markers.addLayer(marker);
-		        marker.on('click', function() {
 
-				 var results=getNearestHospital(marker._latlng.lat,marker._latlng.lng);
-		
-       			
-            });
+		        markers.addLayer(marker);
+		        markerList.push(marker);
 		    {{/each}}
-		    map.addLayer(markers);
+
+		    for(var i=0;i<markerList.length;i++){
+		    	console.log(i);
+		    	markerList[i].on('click',function(e){
+		    		console.log("this"+e.target._latlng.lat,e.target._latlng.lng);
+		    		var result=getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+		    	});
+		    }
+		    
 		
+		    map.addLayer(markers);
+
+
 		</script>

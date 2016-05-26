@@ -49,8 +49,10 @@ module.exports.getParkData = function (req,res) {
 //hospital 
 module.exports.getNearestHospitalData=function(req,res){
 	//select min distance hospital query
+
 	var target_X=req.body.lat;
 	var target_Y=req.body.lng;
+	console.log("in data.js"+target_X+target_Y);
 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
