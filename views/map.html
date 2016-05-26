@@ -43,10 +43,10 @@
 				<img src="https://placehold.it/200x75" class="placeimg"/>
 				<div class="placename">name of place</div>
 				<div class="information">
-					<b>nearest police station:</b>
-					5 mi.
-					<b>nearest clinic:</b> 
-					8 mi.
+					<b >nearest police station:</b>
+					<b id="nearestPolice">5 mi.</b>
+					<b >nearest clinic:</b> 
+					<b id=nearestHospital>8 mi</b>.
 				</div>
 			</div>
 
@@ -91,16 +91,12 @@
 		        marker.bindPopup(title);
 		        markers.addLayer(marker);
 		        marker.on('click', function() {
-				console.log(marker._latlng.lat,marker._latlng.lng);
-              	getNearestHospital(marker._latlng.lat,marker._latlng.lng);
+
+				 var results=getNearestHospital(marker._latlng.lat,marker._latlng.lng);
+		
+       			
             });
 		    {{/each}}
 		    map.addLayer(markers);
-
-			marker.on('click', function() {
-				console.log(markers._latlng.lat,markers._latlng.lng);
-              	var results=getNearestHospital(markers._latlng.lat,markers._latlng.lng);
-              	console.log(results);
-            });
 		
 		</script>

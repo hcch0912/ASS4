@@ -75,10 +75,10 @@ module.exports.getNearestHospitalData=function(req,res){
 			if(res1){
 					var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
 						if(res2){
-							
-							return res.json({nearest:res1.rows,avgDis:res2.rows});
+							console.log(JSON.stringify({nearest:res1.rows[0],avgDis:res2.rows[0]}));
+							return res.send({nearest:res1.rows[0],avgDis:res2.rows[0]});
 						}else{
-							return res.json({delphidata:"No data present hospital"});
+							return res.send({delphidata:"No data present hospital"});
 						}
 					});
 							
