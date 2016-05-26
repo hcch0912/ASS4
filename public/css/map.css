@@ -1,23 +1,28 @@
 #dragme { 
   position: absolute;
-  left: 20;
-  top: 20; /* set these so Chrome doesn't return 'auto' from getComputedStyle */
-  width: 225px; 
+  cursor: move;
+  left: 0;
+  top: 0; /* set these so Chrome doesn't return 'auto' from getComputedStyle */
   background: #ffffff; 
-  border: 2px  solid #dddddd; 
+  border: 1px  solid #999999; 
   border-radius: 4px; 
-  padding: 8px 8px 16px 8px;
-  text-align: center;
+  z-index: 100;
+  margin: 10px 0px 0px 50px;
+  overflow: hidden;
 }
 
+#dragin {
+  padding: 8px 8px 16px 8px;
+  text-align: center;
+  width: 225px; 
+}
 
 #solosd {
-<<<<<<< HEAD
 	font-family: "Trebuchet MS";
 	color: #cccccc;
 	font-size: 35px;
 	margin-top: 10px;
-	margin-bottom: -5px;
+	margin-bottom: 0px;
 }
 
 #solosd b {
@@ -62,20 +67,32 @@ form {
 	vertical-align: text-top;
 }
 
-#logo{
+#logo {
 	width: 200px;
 	height: 200px;
-	align: center;
+	text-align: center;
 }
 
 #map {
-  width: 1280px;
-  height: 1280px;
-  background-image: url("http://maps.googleapis.com/maps/api/staticmap?center=SanDiego&size=640x640&scale=2&style=element:labels|visibility:on&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyC-ei_b2CWVhDAm0LGgJqthcUCWJ-Kiy9s");
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  </*background-image: url("http://maps.googleapis.com/maps/api/staticmap?center=SanDiego&size=640x640&scale=2&style=element:labels|visibility:on&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyC-ei_b2CWVhDAm0LGgJqthcUCWJ-Kiy9s");*/
 }
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+#collapse {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 10px 0px 0px 20px;
+	font-family: "Trebuchet MS";
+	z-index: 101;
+	cursor: pointer!important;
 }
