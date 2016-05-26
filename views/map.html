@@ -43,10 +43,10 @@
 				<img src="https://placehold.it/200x75" class="placeimg"/>
 				<div  id="currplace" class="placename">name of place</div>
 				<div class="information">
-					<b>nearest police station:</b>
-					5 mi.
-					<b>nearest clinic:</b> 
-					8 mi.
+					<b >nearest police station:</b>
+					<b id="nearestPolice">5 mi.</b>
+					<b >nearest clinic:</b> 
+					<b id=nearestHospital>8 mi</b>.
 				</div>
 			</div>
 
@@ -82,27 +82,30 @@
 		        .setView([32.9770911, -117.2448969], 9);
 
 		    var markers = new L.MarkerClusterGroup();
-		    
+		    var markerList=[];
 		    {{#each parks}}
-		        console.log('{{name}}');
+		        
 		        var title = '{{name}}';
 		        var marker = L.marker(new L.LatLng({{latitude}}, {{longitude}}), {
 		            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
 		            title: title
 		        });
 		        marker.bindPopup(title);
+
 		        markers.addLayer(marker);
-		        marker.on('click', function() {
-				console.log(marker._latlng.lat,marker._latlng.lng);
-              	getNearestHospital(marker._latlng.lat,marker._latlng.lng);
-            });
+		        markerList.push(marker);
 		    {{/each}}
+
+		    for(var i=0;i<markerList.length;i++){
+		    	console.log(i);
+		    	markerList[i].on('click',function(e){
+		    		console.log("this"+e.target._latlng.lat,e.target._latlng.lng);
+		    		var result=getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+		    	});
+		    }
+		    
+		
 		    map.addLayer(markers);
 
-			marker.on('click', function() {
-				console.log(markers._latlng.lat,markers._latlng.lng);
-              	var results=getNearestHospital(markers._latlng.lat,markers._latlng.lng);
-              	console.log(results);
-            });
-		
+
 		</script>
