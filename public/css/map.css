@@ -174,7 +174,8 @@ html, body {
 	font-weight: normal;
 	line-height: 50px;	
 	border: 1px solid #999999; 
-	font-weight: bold;
+	font-weight: bold;	
+	cursor: pointer!important;
 }
 
 
