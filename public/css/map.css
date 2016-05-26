@@ -11,13 +11,27 @@
   overflow: hidden;
 }
 
-#dragin {
+
+#infome { 
+  position: absolute;
+  cursor: move;
+  right: 0;
+  top: 0; /* set these so Chrome doesn't return 'auto' from getComputedStyle */
+  background: #ffffff; 
+  border: 1px  solid #999999; 
+  border-radius: 4px; 
+  z-index: 100;
+  margin: 10px 10px 0px 0px;
+  overflow: hidden;
+}
+
+#dragin, #infoin {
   padding: 8px 8px 16px 8px;
   text-align: center;
   width: 225px; 
 }
 
-#solosd {
+.solosd {
 	font-family: "Trebuchet MS";
 	color: #cccccc;
 	font-size: 35px;
@@ -25,7 +39,7 @@
 	margin-bottom: 0px;
 }
 
-#solosd b {
+.solosd b {
 	color: #66d9ef;
 }
 
@@ -52,6 +66,20 @@ h2 {
 	padding: 0px;
 	margin: 10px 0px 10px 40px;
 	text-align: left;
+}
+
+.placename {
+	font-family: "Trebuchet MS";
+	color: #222222;
+	font-size: 18px;
+	font-weight: normal;
+	padding: 0px;
+	background-color: rgba(255,255,255,.8);
+	height: 20px;
+	line-height: 20px;
+	margin: -35px 0px 15px 0px;
+	position: relative;
+	z-index: 3;
 }
 
 form {
@@ -87,7 +115,7 @@ html, body {
   padding: 0;
 }
 
-#collapse {
+#collapse, #infocollapse {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -95,4 +123,21 @@ html, body {
 	font-family: "Trebuchet MS";
 	z-index: 101;
 	cursor: pointer!important;
+}
+
+.placeimg {
+	margin-top: 10px;
+}
+
+.information {
+	font-family: 'Consolas';
+	font-size: 12px;
+	line-height: 15px;
+}
+
+.information b {
+	display: block;
+	text-align: left;
+	margin-left: 20px;
+	margin-top: 5px;
 }

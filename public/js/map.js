@@ -2,6 +2,7 @@ $(document).ready( function () {
 	var closed = false;
 
 	$('#dragme').draggable();
+	$('#infome').draggable();
 
 	$('#collapse').click(function() {
 		if (!closed ) {
