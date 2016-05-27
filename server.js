@@ -41,13 +41,10 @@ app.get('/map', function(req,res){
   	res.render('map',locationData);
 });
 
-app.get('/delphidata/park/:lati(\\d*\.\d*)/:long(\-\d*\.\d*)',dataEndpoint.getParkData);
-  
-app.get('/delphidata/population/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPopulationData);
-app.get('/delphidata/police/:lati(\d*\.\d*)/:long(\d*\.\d*)',dataEndpoint.getPoliceData);
-
-app.get('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
+app.post('/getPark',dataEndpoint.getParkData);
 app.post('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
+app.post('/delphidata/police',dataEndpoint.getNearestPoliceData);
+
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });

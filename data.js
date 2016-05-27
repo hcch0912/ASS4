@@ -1,6 +1,8 @@
 var dotenv = require('dotenv');
 var pg = require('pg');
 dotenv.load();
+var jsonQuery = require('json-query')
+
 
 //connect to database
 var conString = process.env.DATABASE_CONNECTION_URL;
@@ -13,36 +15,16 @@ var hospitalTable="cogs121_16_raw.sandag_hospitals_point_prj";
 
 module.exports.getParkData = function (req,res) {
 
-	var inputlocation=req.params.inputlocation;
+	var parkName=req.body.parkName;
 
-
-	pg.connect(conString, function(err, client, done) {
-	        // Handle connection errors
-
-	       if(err) {
-	          done();
-	          console.log(err);
-	         return res.status(500).json({ success: false, data: err});
-	        }
-	        //Query Park data
-	        var selectParkQuery=
-	        	"select DISTINCT ON (common_nam) common_nam ,community_  , address_lo "
-	        	+" from "+parkTable
-	        	+" where address_lo is not null AND  designated='COMMUNITY PARK'";
-	        var queryPark = client.query(selectParkQuery,function(err,res1){
-	        	
-	        	if(res1){	
-	        			
-	        		return res.json(res1.rows);
-	        		
-	        	}else{
-
-			  		return res.json( { delphidata: "No data present." });
-				}
-	        	 
-	        });
-	       
-		});
+	var parksData = require('./parks.json');
+	
+	for(var i=0;i<parksData.parks.length;i++){
+	
+		if(parksData.parks[i].name==parkName){
+			return res.send(JSON.stringify(parksData.parks[i]));
+		}
+	}
 		
 }
 
@@ -50,9 +32,10 @@ module.exports.getParkData = function (req,res) {
 module.exports.getNearestHospitalData=function(req,res){
 	//select min distance hospital query
 
-	var target_X=req.body.lat;
-	var target_Y=req.body.lng;
-	console.log("in data.js"+target_X+target_Y);
+	 var target_X=req.body.lat;
+	 var target_Y=req.body.lng;
+
+	
 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
@@ -124,40 +107,53 @@ module.exports.getPopulationData = function (req,res) {
 		
 }
 
-module.exports.getPoliceData = function (req,res) {
+//hospital 
+module.exports.getNearestPoliceData=function(req,res){
+	//select min distance hospital query
 
-	var inputlocation=req.params.inputlocation;
+	 var target_X=req.body.lat;
+	 var target_Y=req.body.lng;
+
 	
+	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
+	var selectNearestPoliQuery=
+	" select \"FACILITY\", "+ disEquation+"AS DIS from "+policeTable+
+	" where "+ disEquation+"=(select MIN( "+disEquation+" )"+
+	" from "+policeTable+" )";
+	//average distance to hospital
 
-	pg.connect(conString, function(err, client, done) {
-	        // Handle connection errors
-	       if(err) {
-	          done();
-	          console.log(err);
-	          return { success: false, data: err};
-	        }
-	        //Query Park data
-	        var selectPoliceQuery=
-	        	"select  "
-	        	+" from "+policeTable
-	        	+" where ";
-	        var queryPolice = client.query(selectPoliceQuery,function(err,res1){
-	        	
-	         	
-	        	if(res1){
-	        		
-	        		
-	        		
-	        	}else{
-			  		return res.json( { delphidata: "No data present." });
-				}
-	        	 
-	        });
-	       
+	var getAvgDisPoliQuery=
+	"select AVG ( " + disEquation+ " ) from "+policeTable; 
+
+	pg.connect(conString,function(err,client,done){
+		if(err){
+			done();
+			console.log(err);
+			return res.status(500).json({success:false,data:err});
+		}
+		var queryHospital=client.query(selectNearestPoliQuery,function(err,res1){
+			if(err){
+				console.log(err);
+			}
+			if(res1){
+					var queryAvghospital=client.query(getAvgDisPoliQuery,function(err,res2){
+						if(res2){
+							console.log(JSON.stringify({nearest:res1.rows[0],avgDis:res2.rows[0]}));
+							return res.send({nearest:res1.rows[0],avgDis:res2.rows[0]});
+						}else{
+							return res.send({delphidata:"No data present hospital"});
+						}
+					});
+							
+			}
 		});
-		
+
+	});
 }
+
+
+
 
 /*
  select "OWNNAM1",  

@@ -40,13 +40,13 @@
 			<div class="solosd">information</div>
 
 			<div class="entry">
-				<img src="https://placehold.it/200x75" class="placeimg"/>
+				<img  id="parkImg"  src="https://placehold.it/200x75" class="placeimg"/>
 				<div  id="currplace" class="placename">name of place</div>
 				<div class="information">
-					<b>nearest police station:</b>
-					<div id="nearestPolice">5 mi.</div>
-					<b>nearest clinic:</b> 
-					<div id="nearestHospital">8 mi.</div>
+					<b >nearest police station:</b>
+					<b id="nearestPolice">5 mi.</b>
+					<b >nearest clinic:</b> 
+					<b id=nearestHospital>8 mi</b>.
 				</div>
 			</div>
 
@@ -97,10 +97,11 @@
 		    {{/each}}
 
 		    for(var i=0;i<markerList.length;i++){
-		    	console.log(i);
+		    	
 		    	markerList[i].on('click',function(e){
-		    		console.log("this"+e.target._latlng.lat,e.target._latlng.lng);
-		    		var result=getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+		    		getParkInfo(e.target.options.title);
+		    		getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+		    		getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
 		    	});
 		    }
 		    
