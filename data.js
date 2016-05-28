@@ -118,11 +118,12 @@ module.exports.getNearestPoliceData=function(req,res){
 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestPoliQuery=
-	" select \"FACILITY\", "+ disEquation+"AS DIS from "+policeTable+
+	" select \"FACILITY\", "+ disEquation+" AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
+	" from "+policeTable+
 	" where "+ disEquation+"=(select MIN( "+disEquation+" )"+
 	" from "+policeTable+" )";
 	//average distance to hospital
-
+	
 	var getAvgDisPoliQuery=
 	"select AVG ( " + disEquation+ " ) from "+policeTable; 
 
@@ -139,7 +140,7 @@ module.exports.getNearestPoliceData=function(req,res){
 			if(res1){
 					var queryAvghospital=client.query(getAvgDisPoliQuery,function(err,res2){
 						if(res2){
-							console.log(JSON.stringify({nearest:res1.rows[0],avgDis:res2.rows[0]}));
+							
 							return res.send({nearest:res1.rows[0],avgDis:res2.rows[0]});
 						}else{
 							return res.send({delphidata:"No data present hospital"});
@@ -152,7 +153,28 @@ module.exports.getNearestPoliceData=function(req,res){
 	});
 }
 
+module.exports.getCemetryData=function(req,res){
+	console.log("in get cemetry data .sj");
+	var selectCemetryQuery=
+	"select \"DISTRICT\" , ST_Y(ST_TRANSFORM(geom, 4326)) as x, ST_X(ST_TRANSFORM(geom, 4326)) as y "+
+	"from sandag_cemetery_project";
 
+	pg.connect(conString,function(err,client,done){
+		if(err){
+			done();
+			
+			return res.status(500).json({success:false,data:err});
+		}
+		var queryCemetry=client.query(selectCemetryQuery,function(err,res1){
+			if(res1){
+				console.log("res1");
+				return res.send(JSON.stringify(res1));
+			}else{
+				console.log("no no no")
+			}
+		});
+	});
+}
 
 
 /*

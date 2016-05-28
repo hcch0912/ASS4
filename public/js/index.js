@@ -1,5 +1,8 @@
 var map;
 
+
+
+
 $(document).ready( function () {
 
   $('#toHelp').click(function(e) {
@@ -16,6 +19,209 @@ $(document).ready( function () {
 
 
 });
+
+//globle location variable
+
+var thisPlace={};
+
+    thisPlace.showPoliceMarker=false;
+
+function oncheck(element){
+  element.checked=element.checked;
+  if(element.checked==true){
+      switch (element.name){
+        case  "parks":
+          addParkMarker();
+          break;
+        case "cemeteries":
+          addCemetryMarker();
+          break;
+        case "canyons":
+          addCanyonsMarker();
+          break;
+        default:
+          break;
+      }
+  }else{
+      switch (element.name){
+        case  "parks":
+          clearPark();
+          break;
+        case "cemeteries":
+          clearCemetry();
+          break;
+        case "canyons":
+          clearCanyons();
+          break;
+        default:
+          break;
+      }
+  }
+
+}
+
+
+function addParkMarker(){
+
+    $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/getParks',            
+            success: function(data) {
+
+                
+                var markerList=[];
+                  
+                for(var i=0;i<data.length;i++){  
+                    var title = data[i].name;
+                    var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), {
+                        icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '#2d862d'}),
+                        title: title
+                    });
+                    marker.bindPopup(title);
+
+                    parkMarkers.addLayer(marker);
+                    markerList.push(marker);
+                }
+
+                for(var i=0;i<markerList.length;i++){
+                  
+                  markerList[i].on('click',function(e){
+                    getParkInfo(e.target.options.title);
+                    getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
+                  });
+                }
+                map.addLayer(parkMarkers);
+             }
+    });
+}
+
+
+
+function clearPark(){
+        map.removeLayer(parkMarkers);
+
+}
+
+function addCemetryMarker(){
+     $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/delphi/getCemetry',            
+            success: function(data) {
+                var markerList=[];
+                  
+                for(var i=0;i<data.length;i++){  
+                    var title = data[i].name;
+                    var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), {
+                        icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '#2d862d'}),
+                        title: title
+                    });
+                    marker.bindPopup(title);
+
+                    parkMarkers.addLayer(marker);
+                    markerList.push(marker);
+                }
+
+                for(var i=0;i<markerList.length;i++){
+                  
+                  markerList[i].on('click',function(e){
+                    getParkInfo(e.target.options.title);
+                    getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
+                  });
+                }
+                map.addLayer(parkMarkers);
+            
+             }
+   });
+}
+
+function clearCemetry(){
+  map.removeLayer(cemetryMarkers);
+}
+function addCanyonsMarker(){
+     $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/delphi/getCanyons',            
+            success: function(data) {
+                var markerList=[];
+                  
+                for(var i=0;i<data.length;i++){  
+                    var title = data[i].name;
+                    var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), {
+                        icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '#2d862d'}),
+                        title: title
+                    });
+                    marker.bindPopup(title);
+
+                    parkMarkers.addLayer(marker);
+                    markerList.push(marker);
+                }
+
+                for(var i=0;i<markerList.length;i++){
+                  
+                  markerList[i].on('click',function(e){
+                    getParkInfo(e.target.options.title);
+                    getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
+                  });
+                }
+                map.addLayer(parkMarkers);
+            
+             }
+   });
+}
+
+function clearCanyons(){
+  map.removeLayer(canyonsMarkers);
+}
+
+
+//geolocation find user location 
+function findme(){
+    map.locate({setView : true,               
+              maxBounds: bounds,
+              maxZoom: 19,
+              minZoom: 10});
+    var geolocate = document.getElementById('geolocate');
+ 
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    if (!navigator.geolocation) {
+        geolocate.innerHTML = 'Geolocation is not available';
+    } else {
+
+        geolocate.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            map.locate();
+        };
+    }
+
+    map.on('locationfound', function(e) {
+      console.log("in findme")
+        map.fitBounds(e.bounds);
+
+        myLayer.setGeoJSON({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [e.latlng.lng, e.latlng.lat]
+            },
+            properties: {
+                'title': 'Here I am!',
+                'marker-color': '#ff8888',
+                'marker-symbol': 'star'
+            }
+        });
+
+    });
+    map.on('locationerror', function() {
+        console.log("err");
+        geolocate.innerHTML = 'Position could not be found';
+    });
+}
 
 
 function getNearestHospital(lat,lng){
@@ -39,14 +245,11 @@ function getNearestHospital(lat,lng){
                     results.avg=data.avgDis.avg;
                    
                     var hospitalName=document.getElementById("nearestHospital");
-                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
-                  
-                    
+                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;      
              }
    });
-	  
-	
-	}
+  }
+
 
 
 function getNearestPolice(lat,lng){
@@ -54,7 +257,6 @@ function getNearestPolice(lat,lng){
   var data={};
   data.lat=lat;
   data.lng=lng;
-
 
   var results={};
 
@@ -66,21 +268,50 @@ function getNearestPolice(lat,lng){
             url: 'http://localhost:3000/delphidata/police',            
             success: function(data) {
                     results.name=data.nearest.FACILITY;
+                    results.lat=data.nearest.st_x;
+                    results.lng=data.nearest.st_y;
                     results.distance=data.nearest.dis;
                     results.avg=data.avgDis.avg;
                    
                     var hospitalName=document.getElementById("nearestPolice");
                     hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
-                  
-                    
+                    thisPlace.police={name:results.name,lat:results.lat,lng:results.lng};
+
              }
    });
-    
-  
   }
 
+function showPolice(){
+
+      
+       policeMarker=L.mapbox.featureLayer({
+
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [
+                thisPlace.police.lat,
+                thisPlace.police.lng 
+              ]
+          },
+          properties: {
+              title: thisPlace.police.name,
+              'marker-size': 'large',
+              'marker-color': '#BE9A6B',
+              'marker-symbol': 'police'
+          }
+      });
+      policeMarker.addTo(map);
+      thisPlace.showPoliceMarker=true;
+  
+}
 
 function getParkInfo(parkName){
+
+  if(thisPlace.showPoliceMarker==true){
+    thisPlace.showPoliceMarker==false;
+    map.removeLayer(policeMarker);
+  }
   var data={};
   data.parkName=parkName;
    var results={};
@@ -90,14 +321,23 @@ function getParkInfo(parkName){
             dataType: 'json',
             data:JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:3000/getPark',            
+            url: 'http://localhost:3000/getParkInfo',            
             success: function(data) {
                   document.getElementById("currplace").innerHTML=data.name;
                   document.getElementById("parkImg").src=data.img;
+                  thisPlace=data;
+                  thisPlace.isTarget=true;
+
             
              }
    });
 }
+
+
+
+
+
+
 /*
 // get user input 
 function useData(inputlocation){

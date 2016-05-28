@@ -34,14 +34,21 @@ app.get('/', function(req, res){
   
   res.render('index');
 });
-//render map page with parks location info 
+//render map page with parks location info --default setting
 app.get('/map', function(req,res){
-	var locationData = require('./parks.json');
 
-  	res.render('map',locationData);
+  	res.render('map');
 });
 
-app.post('/getPark',dataEndpoint.getParkData);
+app.get('/getParks', function(req,res){
+	var locationData = require('./parks.json');
+  	res.send(locationData.parks);
+});
+app.get('/delphi/getCemetry',dataEndpoint.getCemetryData);
+//app.get('/delphi/getCanyons',dataEndpoint.getCanyonsData);
+
+
+app.post('/getParkInfo',dataEndpoint.getParkData);
 app.post('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
 app.post('/delphidata/police',dataEndpoint.getNearestPoliceData);
 

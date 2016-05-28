@@ -9,21 +9,16 @@
 			<div class="solosd"> solo<b>sd</b> </div>
 
 			<div class="border"></div>
-
+			<section>
+			<h2>Where are U?</h2>
+			<button onclick="findme()">Find Me</button><br>
+			<a id="geolocate"> </a>
+			</section>
 			<h2>where to?</h2>
 			<form id="places">
-			  <input type="checkbox" name="gender" value="parks" checked> <span class="desc">parks</span><br>
-			  <input type="checkbox" name="gender" value="cemeteries"> <span class="desc">cemeteries</span><br>
-			  <input type="checkbox" name="gender" value="canyons"> <span class="desc">canyons</span>
-			</form>
-
-			<div class="border"></div>
-
-			<h2>show nearby:</h2>
-			<form id="places">
-			  <input type="checkbox" name="gender" value="parks" checked> <span class="desc">clinics</span><br>
-			  <input type="checkbox" name="gender" value="cemeteries"> <span class="desc">police stations</span><br>
-			  <input type="checkbox" name="gender" value="canyons"> <span class="desc">eateries</span>
+			  <input type="checkbox" name="parks" value="parks" onclick="oncheck(this)"> <span class="desc">parks</span><br>
+			  <input type="checkbox" name="cemeteries" value="cemeteries" onclick="oncheck(this)"> <span class="desc">cemeteries</span><br>
+			  <input type="checkbox" name="canyons" value="canyons" onclick="oncheck(this)"> <span class="desc">canyons</span>
 			</form>
 
 			<div class="border"></div>
@@ -44,11 +39,22 @@
 				<div  id="currplace" class="placename">name of place</div>
 				<div class="information">
 					<b >nearest police station:</b>
+					<button onclick="showPolice()">show it</button>
 					<b id="nearestPolice">5 mi.</b>
+					
 					<b >nearest clinic:</b> 
-					<b id=nearestHospital>8 mi</b>.
+					<button onclick="showHospital()">show it</button>
+					<b id=nearestHospital>8 mi</b>
+					
 				</div>
 			</div>
+			<div class="border"></div>
+			<h2>show nearby:</h2>
+			<form id="places">
+			  <input type="checkbox" name="Beverage" value="Beverage" onclick="showBeverage()"> <span class="desc">Beverage</span><br>
+			  <input type="checkbox" name="Food" value="Food" onclick="showFood()"> <span class="desc">Food</span><br>
+			  <input type="checkbox" name="Grocery" value="Grocery" onclick="showGrocery()"> <span class="desc">Grocery</span>
+			</form>
 
 			<button type="button" class="locationbutton">save location</button>
 
@@ -78,35 +84,23 @@
 
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoidnJuYyIsImEiOiJjaW85a2E1dG4wMzZrdnBrajFqZHV3aTYwIn0.BVUSKwO5hVenIwMkR-_DrA';
-		    var map = L.mapbox.map('map', 'mapbox.streets')
+
+		//set zoom bound 
+		var southWest = L.latLng(32.70, -117.361),
+		    northEast = L.latLng(33.100, -116.536),
+		    bounds = L.latLngBounds(southWest, northEast);
+
+
+		    var map = L.mapbox.map('map', 'mapbox.streets',{
+		    		    maxBounds: bounds,
+					    maxZoom: 19,
+					    minZoom: 10
+		   		 })
 		        .setView([32.9770911, -117.2448969], 9);
-
-		    var markers = new L.MarkerClusterGroup();
-		    var markerList=[];
-		    {{#each parks}}
-		        
-		        var title = '{{name}}';
-		        var marker = L.marker(new L.LatLng({{latitude}}, {{longitude}}), {
-		            icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
-		            title: title
-		        });
-		        marker.bindPopup(title);
-
-		        markers.addLayer(marker);
-		        markerList.push(marker);
-		    {{/each}}
-
-		    for(var i=0;i<markerList.length;i++){
-		    	
-		    	markerList[i].on('click',function(e){
-		    		getParkInfo(e.target.options.title);
-		    		getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
-		    		getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
-		    	});
-		    }
-		    
-		
-		    map.addLayer(markers);
-
+		    var parkMarkers = new L.MarkerClusterGroup();
+			var cemetryMarkers = new L.MarkerClusterGroup();
+			var canyonsMarkers = new L.MarkerClusterGroup();
+			var hospitalmarker;
+			var policeMarker;
 
 		</script>
