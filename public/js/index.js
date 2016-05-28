@@ -23,6 +23,7 @@ $(document).ready( function () {
 //globle location variable
 
 var thisPlace={};
+    thisPlace.has=false;
     thisPlace.showPoliceMarker=false;
     thisPlace.showHospitalMarker=false;
 
@@ -284,7 +285,7 @@ function getNearestPolice(lat,lng){
 
 function showPolice(){
 
-      
+    if(thisPlace.has==true){
        policeMarker=L.mapbox.featureLayer({
 
           type: 'Feature',
@@ -300,16 +301,17 @@ function showPolice(){
               'marker-size': 'large',
               'marker-color': '#BE9A6B',
               'marker-symbol': 'police'
-          }
+          
+      }
       });
       policeMarker.addTo(map);
       thisPlace.showPoliceMarker=true;
-  
+  }
 }
 
 function showClinic(){
 
-      
+    if(thisPlace.has==true){  
        hospitalMarker=L.mapbox.featureLayer({
 
           type: 'Feature',
@@ -329,7 +331,7 @@ function showClinic(){
       });
       hospitalMarker.addTo(map);
       thisPlace.showPoliceMarker=true;
-  
+  }
 }
 
 

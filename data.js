@@ -11,7 +11,12 @@ var parkTable="cogs121_16_raw.sandag_parks_cntyandcity_prj";
 var populationTable="cogs121_16_raw.hhsa_san_diego_demographics_county_population_2012";
 var policeTable="cogs121_16_raw.sandag_lawenforcementfacilities_prj";
 var hospitalTable="cogs121_16_raw.sandag_hospitals_point_prj";
+var foodTable="cogs121_16_raw.sandag_food_business_prj";
+var BeverageTable="cogs121_16_raw.sandag_foodbeverage_business_prj";
+var groceryTable="cogs121_16_raw.sandag_foodgrocery_business_prj";
 
+
+var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 module.exports.getParkData = function (req,res) {
 
@@ -36,7 +41,7 @@ module.exports.getNearestHospitalData=function(req,res){
 	 var target_Y=req.body.lng;
 
 	
-	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+	//var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
 	" select \"OWNNAM1\", "+ disEquation+"AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
@@ -116,7 +121,7 @@ module.exports.getNearestPoliceData=function(req,res){
 	 var target_Y=req.body.lng;
 
 	
-	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+	//var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestPoliQuery=
 	" select \"FACILITY\", "+ disEquation+" AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
@@ -155,7 +160,7 @@ module.exports.getNearestPoliceData=function(req,res){
 }
 
 module.exports.getCemetryData=function(req,res){
-	console.log("in get cemetry data .sj");
+	
 	var selectCemetryQuery=
 	"select \"DISTRICT\" , ST_Y(ST_TRANSFORM(geom, 4326)) as x, ST_X(ST_TRANSFORM(geom, 4326)) as y "+
 	"from sandag_cemetery_project";
@@ -171,11 +176,82 @@ module.exports.getCemetryData=function(req,res){
 				console.log("res1");
 				return res.send(JSON.stringify(res1));
 			}else{
-				console.log("no no no")
+				return res.status(500).json({success:false,data:err});
 			}
 		});
 	});
+};
+
+
+module.exports.getAroundFood=function(req,res){
+		var selectFoodQuery=
+		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		" from "+foodTable+
+		" order by "+disEquation+
+		" limit 3";
+
+		pg.connect(conString,function(err,client,done){
+			if(err){
+				done();
+				return res.status(500).json({success:false,data:err});
+			}
+		var queryFood=client.query(selectFoodQuery,function(err,res1){
+			if(res1){
+				console.log("res1");
+				return res.send(JSON.stringify(res1));
+			}else{
+				return res.status(500).json({success:false,data:err});
+			}
+		});
+		});
 }
+
+module.exports.getAroundBeverage=function(req,res){
+		var selectBeverageQuery=
+		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		" from "+BeverageTable+
+		" order by "+disEquation+
+		" limit 3";
+
+		pg.connect(conString,function(err,client,done){
+			if(err){
+				done();
+				return res.status(500).json({success:false,data:err});
+			}
+		var queryBeverage=client.query(selectBeverageQuery,function(err,res1){
+			if(res1){
+				console.log("res1");
+				return res.send(JSON.stringify(res1));
+			}else{
+				return res.status(500).json({success:false,data:err});
+			}
+		});
+		});
+}
+
+module.exports.getAroundGrocery=function(req,res){
+		var selectGroceryQuery=
+		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		" from "+groceryTable+
+		" order by "+disEquation+
+		" limit 3";
+
+		pg.connect(conString,function(err,client,done){
+			if(err){
+				done();
+				return res.status(500).json({success:false,data:err});
+			}
+		var queryGrocery=client.query(selectGroceryQuery,function(err,res1){
+			if(res1){
+				console.log("res1");
+				return res.send(JSON.stringify(res1));
+			}else{
+				return res.status(500).json({success:false,data:err});
+			}
+		});
+		});
+}
+
 
 
 /*

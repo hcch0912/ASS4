@@ -36,7 +36,6 @@ app.get('/', function(req, res){
 });
 //render map page with parks location info --default setting
 app.get('/map', function(req,res){
-
   	res.render('map');
 });
 
@@ -51,6 +50,11 @@ app.get('/delphi/getCemetry',dataEndpoint.getCemetryData);
 app.post('/getParkInfo',dataEndpoint.getParkData);
 app.post('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
 app.post('/delphidata/police',dataEndpoint.getNearestPoliceData);
+
+app.post('/delphi/food',dataEndpoint.getAroundFood);
+app.post('/delphi/beverage',dataEndpoint.getAroundBeverage);
+app.post('/delphi/grocery',dataEndpoint.getAroundGrocery);
+
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
