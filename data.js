@@ -16,7 +16,6 @@ var BeverageTable="cogs121_16_raw.sandag_foodbeverage_business_prj";
 var groceryTable="cogs121_16_raw.sandag_foodgrocery_business_prj";
 
 
-var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 module.exports.getParkData = function (req,res) {
 
@@ -41,7 +40,7 @@ module.exports.getNearestHospitalData=function(req,res){
 	 var target_Y=req.body.lng;
 
 	
-	//var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
 	" select \"OWNNAM1\", "+ disEquation+"AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
@@ -121,7 +120,7 @@ module.exports.getNearestPoliceData=function(req,res){
 	 var target_Y=req.body.lng;
 
 	
-	//var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestPoliQuery=
 	" select \"FACILITY\", "+ disEquation+" AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
@@ -184,6 +183,11 @@ module.exports.getCemetryData=function(req,res){
 
 
 module.exports.getAroundFood=function(req,res){
+		var target_X=req.body.lat;
+		var target_Y=req.body.lng;
+		var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+
+
 		var selectFoodQuery=
 		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
 		" from "+foodTable+
@@ -207,6 +211,10 @@ module.exports.getAroundFood=function(req,res){
 }
 
 module.exports.getAroundBeverage=function(req,res){
+		var target_X=req.body.lat;
+	 	var target_Y=req.body.lng;
+	 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+
 		var selectBeverageQuery=
 		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
 		" from "+BeverageTable+
@@ -230,6 +238,10 @@ module.exports.getAroundBeverage=function(req,res){
 }
 
 module.exports.getAroundGrocery=function(req,res){
+		var target_X=req.body.lat;
+	 	var target_Y=req.body.lng;
+	 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
+
 		var selectGroceryQuery=
 		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
 		" from "+groceryTable+
