@@ -23,8 +23,8 @@ $(document).ready( function () {
 //globle location variable
 
 var thisPlace={};
-
     thisPlace.showPoliceMarker=false;
+    thisPlace.showHospitalMarker=false;
 
 function oncheck(element){
   element.checked=element.checked;
@@ -245,7 +245,8 @@ function getNearestHospital(lat,lng){
                     results.avg=data.avgDis.avg;
                    
                     var hospitalName=document.getElementById("nearestHospital");
-                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;      
+                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
+                    thisPlace.hospital={name:results.name,lat:data.nearest.st_x,lng:data.nearest.st_y};      
              }
    });
   }
@@ -306,11 +307,40 @@ function showPolice(){
   
 }
 
+function showClinic(){
+
+      
+       hospitalMarker=L.mapbox.featureLayer({
+
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [
+                thisPlace.hospital.lat,
+                thisPlace.hospital.lng 
+              ]
+          },
+          properties: {
+              title: thisPlace.hospital.name,
+              'marker-size': 'large',
+              'marker-color': '#BE9A6B',
+              'marker-symbol': 'hospital'
+          }
+      });
+      hospitalMarker.addTo(map);
+      thisPlace.showPoliceMarker=true;
+  
+}
+
+
 function getParkInfo(parkName){
 
-  if(thisPlace.showPoliceMarker==true){
-    thisPlace.showPoliceMarker==false;
+  if(thisPlace.showPoliceMarker==true||thisPlace.showHospitalMarker==true){
     map.removeLayer(policeMarker);
+    thisPlace.showPoliceMarker==false;
+    map.removeLayer(hospitalMarker);
+    thisPlace.showHospitalMarker==false;
+    
   }
   var data={};
   data.parkName=parkName;

@@ -39,7 +39,8 @@ module.exports.getNearestHospitalData=function(req,res){
 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 	var selectNearestHosQuery=
-	" select \"OWNNAM1\", "+ disEquation+"AS DIS from "+hospitalTable+
+	" select \"OWNNAM1\", "+ disEquation+"AS DIS ,ST_Y(ST_TRANSFORM(geom, 4326)) ,ST_X(ST_TRANSFORM(geom, 4326)) "+
+	" from "+hospitalTable+
 	" where "+ disEquation+"=(select MIN( "+disEquation+" )"+
 	" from "+hospitalTable+" )";
 	//average distance to hospital
@@ -60,7 +61,7 @@ module.exports.getNearestHospitalData=function(req,res){
 			if(res1){
 					var queryAvghospital=client.query(getAvgDisHosQuery,function(err,res2){
 						if(res2){
-							console.log(JSON.stringify({nearest:res1.rows[0],avgDis:res2.rows[0]}));
+							
 							return res.send({nearest:res1.rows[0],avgDis:res2.rows[0]});
 						}else{
 							return res.send({delphidata:"No data present hospital"});
