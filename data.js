@@ -189,10 +189,10 @@ module.exports.getAroundFood=function(req,res){
 
 
 		var selectFoodQuery=
-		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+foodTable+
-		" order by "+disEquation+
-		" limit 3";
+		" where "+disEquation+
+		" <0.03 limit 100";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -202,7 +202,7 @@ module.exports.getAroundFood=function(req,res){
 		var queryFood=client.query(selectFoodQuery,function(err,res1){
 			if(res1){
 				console.log("res1");
-				return res.send(JSON.stringify(res1));
+				return res.send(JSON.stringify(res1.rows));
 			}else{
 				return res.status(500).json({success:false,data:err});
 			}
@@ -216,10 +216,10 @@ module.exports.getAroundBeverage=function(req,res){
 	 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 		var selectBeverageQuery=
-		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+BeverageTable+
-		" order by "+disEquation+
-		" limit 3";
+		" where "+disEquation+
+		" <0.03 limit 100";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -229,7 +229,7 @@ module.exports.getAroundBeverage=function(req,res){
 		var queryBeverage=client.query(selectBeverageQuery,function(err,res1){
 			if(res1){
 				console.log("res1");
-				return res.send(JSON.stringify(res1));
+				return res.send(JSON.stringify(res1.rows));
 			}else{
 				return res.status(500).json({success:false,data:err});
 			}
@@ -243,10 +243,10 @@ module.exports.getAroundGrocery=function(req,res){
 	 	var disEquation=" sqrt((ST_Y(ST_TRANSFORM(geom, 4326))-"+ target_X +")^2+(ST_X(ST_TRANSFORM(geom, 4326))-("+target_Y+"))^2) "
 
 		var selectGroceryQuery=
-		"select \"X_COORD\", \"Y_COORD\" ,\"OWNNAM1\" "+
+		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+groceryTable+
-		" order by "+disEquation+
-		" limit 3";
+		" where "+disEquation+
+		" <0.03 limit 100";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -256,7 +256,7 @@ module.exports.getAroundGrocery=function(req,res){
 		var queryGrocery=client.query(selectGroceryQuery,function(err,res1){
 			if(res1){
 				console.log("res1");
-				return res.send(JSON.stringify(res1));
+				return res.send(JSON.stringify(res1.rows));
 			}else{
 				return res.status(500).json({success:false,data:err});
 			}
