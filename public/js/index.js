@@ -497,7 +497,7 @@ function addFoodMarker(){
                               title: thisPlace.food[i].name,
                               'marker-size': 'medium',
                               'marker-color': '#ff9933',
-                              'marker-symbol': 'fast-food'
+                              'marker-symbol': 'ice-cream'
                           
                       }
                       });
@@ -567,7 +567,9 @@ function reset(){
     document.getElementById("food").checked=false;
     document.getElementById("beverage").checked=false;
     document.getElementById("grocery").checked=false;
-
+    document.getElementById("foodMsg").innerHTML="";
+    document.getElementById("beverageMsg").innerHTML="";
+    document.getElementById("groceryMsg").innerHTML="";
 
     if(thisPlace.showPoliceMarker==true){
     map.removeLayer(policeMarker);
@@ -629,6 +631,11 @@ function saveLocation(){
   //add all of the info to the statspage 
   document.getElementById("placeName").innerHTML=thisPlace.name;
   document.getElementById("placeImg").src=thisPlace.img;
+
+  var parentNode=document.getElementById("statspage");
+  var sbling=parentNode.lastChild;
+  var newChild=sbling.cloneNode(true);
+
   var chart = c3.generate({
             data: {
                 columns: [
@@ -642,10 +649,9 @@ function saveLocation(){
                 width: {
                     ratio: 0.5 // this makes bar width 50% of length between ticks
                 }
-                // or
-                //width: 100 // this makes bar width 100px
             }
         });
+
 }
 
 
