@@ -69,6 +69,7 @@ function oncheck(element){
           break;
         case "food":
           clearFood();
+          break;
         case "beverage":
           clearBeverage();
           break;
@@ -169,7 +170,11 @@ function addCanyonsMarker(){
                 for(var i=0;i<data.length;i++){  
                     var title = data[i].name;
                     var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), {
-                        icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '#2d862d'}),
+                        icon: L.mapbox.marker.icon({
+                          'marker-symbol': 'park',
+                           'marker-color': '#2d862d',
+                           'marker-size':'large'
+                         }),
                         title: title
                     });
                     marker.bindPopup(title);
@@ -242,13 +247,8 @@ function findme(){
 }
 
 function getParkInfo(parkName){
-
-  if(thisPlace.showPoliceMarker==true||thisPlace.showHospitalMarker==true){
-    map.removeLayer(policeMarker);
-    thisPlace.showPoliceMarker==false;
-    map.removeLayer(hospitalMarker);
-    thisPlace.showHospitalMarker==false;
-    
+  if(thisPlace.has==true){
+  reset();
   }
   var data={};
   data.parkName=parkName;
@@ -265,10 +265,8 @@ function getParkInfo(parkName){
                   document.getElementById("parkImg").src=data.img;
                   thisPlace=data;
                   thisPlace.has=true;
-                  clearPolice
-                  clearGrocery();
-                  clearBeverage();
-                  clearFood();
+                  
+
             
              }
    });
@@ -397,19 +395,27 @@ function showFood(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/food',            
                 success: function(data) {
-                  for(var i=0;i<data.length;i++){
-                      results.push({name:data[i].OWNNAM1,
-                                    lat:data[i].st_x,
-                                    lng:data[i].st_y
-                                  });
+                  if(data.length>0){
+                    for(var i=0;i<data.length;i++){
+                        results.push({name:data[i].OWNNAM1,
+                                      lat:data[i].st_x,
+                                      lng:data[i].st_y
+                                    });
+                    }
+                          thisPlace.food=results;
+                          addFoodMarker();
+                   
+                  }else{
+                    document.getElementById("foodMsg").innerHTML="No Food";
                   }
-                        thisPlace.food=results;
-                        addFoodMarker();
-                 }
+              }
        });
+  }else{
+    console.log("msg you didn't select any thing ");
   }
 }
 function showBeverage(){
+
   if(thisPlace.has==true){  
   var data={lat:thisPlace.latitude,lng:thisPlace.longitude};
   var results=[];
@@ -420,16 +426,23 @@ function showBeverage(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/beverage',            
                 success: function(data) {
-                  for(var i=0;i<data.length;i++){
-                      results.push({name:data[i].OWNNAM1,
-                                    lat:data[i].st_x,
-                                    lng:data[i].st_y
-                                  });
-                  }     
-                        thisPlace.beverage=results;
-                        addBeverageMarker();
-                 }
+                  if(data.length>0){
+                      for(var i=0;i<data.length;i++){
+                          results.push({name:data[i].OWNNAM1,
+                                        lat:data[i].st_x,
+                                        lng:data[i].st_y
+                                      });
+                      }     
+                            thisPlace.beverage=results;
+                            addBeverageMarker();
+                     
+                  }else{
+                    document.getElementById("beverageMsg").innerHTML="No Beverage";
+                  }
+              }
        });
+  }else{
+    console.log("msg you didn't select any thing ");
   }
 }
 
@@ -444,6 +457,7 @@ function showGrocery(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/grocery',            
                 success: function(data) {
+                  if(data.length>0){
                     for(var i=0;i<data.length;i++){
                       results.push({name:data[i].OWNNAM1,
                                     lat:data[i].st_x,
@@ -453,8 +467,13 @@ function showGrocery(){
 
                         thisPlace.grocery=results;
                         addGroceryMarker();
-                 }
+                }else{
+                    document.getElementById("groceryMsg").innerHTML="No Grocery";
+                }
+            }
        });
+  }else{
+    console.log("msg you didn't select any thing "); 
   }
 }
 
@@ -476,9 +495,9 @@ function addFoodMarker(){
                           },
                           properties: {
                               title: thisPlace.food[i].name,
-                              'marker-size': 'large',
+                              'marker-size': 'medium',
                               'marker-color': '#ff9933',
-                              'marker-symbol': 'food'
+                              'marker-symbol': 'fast-food'
                           
                       }
                       });
@@ -505,9 +524,9 @@ function addBeverageMarker(){
           },
           properties: {
               title: thisPlace.beverage[i].name,
-              'marker-size': 'large',
+              'marker-size': 'medium',
               'marker-color': '#66ccff',
-              'marker-symbol': 'beverage'
+              'marker-symbol': 'bar'
           }
       });
        beverageMarker.addLayer(marker);
@@ -526,13 +545,13 @@ function addGroceryMarker(){
           geometry: {
               type: 'Point',
               coordinates: [
-                thisPlace.grocery.lat,
-                thisPlace.grocery.lng 
+                thisPlace.grocery[i].lat,
+                thisPlace.grocery[i].lng 
               ]
           },
           properties: {
-              title: thisPlace.grocery.name,
-              'marker-size': 'large',
+              title: thisPlace.grocery[i].name,
+              'marker-size': 'medium',
               'marker-color': '#BE9A6B',
               'marker-symbol': 'grocery'
           }
@@ -544,6 +563,31 @@ function addGroceryMarker(){
   
 }
 
+function reset(){
+    document.getElementById("food").checked=false;
+    document.getElementById("beverage").checked=false;
+    document.getElementById("grocery").checked=false;
+
+
+    if(thisPlace.showPoliceMarker==true){
+    map.removeLayer(policeMarker);
+    thisPlace.showPoliceMarker==false;
+    }
+    if(thisPlace.showHospitalMarker==true){
+    map.removeLayer(hospitalMarker);
+    thisPlace.showHospitalMarker==false;
+    }
+    if(thisPlace.showGrocery==true){
+      clearGrocery();
+    }
+    if(thisPlace.showBeverage==true){
+      clearBeverage();
+    }
+    if(thisPlace.showFood==true){
+      clearFood();
+    }
+
+}
 function clearCemetry(){
   map.removeLayer(cemetryMarkers);
 }
@@ -555,17 +599,28 @@ function clearPark(){
 }
 function clearFood(){
   map.removeLayer(foodMarker);
+  foodMarker.clearLayers();
+  thisPlace.food=[];
+  showFoodMarker=false;
 }
 function clearBeverage(){
   map.removeLayer(beverageMarker);
+  beverageMarker.clearLayers();
+  thisPlace.beverage=[];
+  showBeverageMarker=false;
 }
 function clearGrocery(){
   map.removeLayer(groceryMarker);
+  groceryMarker.clearLayers();
+  thisPlace.grocery=[];
+  showGroceryMarker=false;
 }
 function clearPolice(){
   map.removeLayer(policeMarker);
+  showPoliceMarker=false;
 }
 function clearClinic(){
   map.removeLayer(hospitalMarker);
+  showHospitalMarker=false;
 }
  

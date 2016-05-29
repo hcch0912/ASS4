@@ -55,10 +55,14 @@
 			<span class="w3-text">U may wanna avoid these!</span>
 			</a>
 			<form id="places">
-			  <input type="checkbox" name="beverage" value="beverage" onclick="oncheck(this)"> <span class="desc">Beverage</span><br>
+			  <input type="checkbox" name="beverage" value="beverage" onclick="oncheck(this)"> <span class="desc">Beverage</span>
+			  <span class="desc" id="beverageMsg"></span><br>
 
-			  <input type="checkbox" name="food" value="food" onclick="oncheck(this)"> <span class="desc">Food</span><br>
-			  <input type="checkbox" name="grocery" value="grocerys" onclick="oncheck(this)"> <span class="desc">Grocery</span>
+			  <input type="checkbox" name="food" value="food" onclick="oncheck(this)"> <span class="desc">Food</span>
+			  <span class="desc" id="foodMsg"></span><br>
+			  <input type="checkbox" name="grocery" value="grocerys" onclick="oncheck(this)">
+			  <span class="desc">Grocery</span>
+			  <span class="desc" id="groceryMsg"></span>
 			</form>
 
 			<button type="button" class="locationbutton">save location</button>
@@ -113,8 +117,38 @@
 			var canyonsMarkers = new L.MarkerClusterGroup();
 			var hospitalMarker;
 			var policeMarker;
-			var foodMarker= new L.MarkerClusterGroup();
-			var beverageMarker= new L.MarkerClusterGroup();
-			var groceryMarker= new L.MarkerClusterGroup();
+			var foodMarker= new L.MarkerClusterGroup({
+			  
+			      iconCreateFunction: function(cluster) {
+			        return L.mapbox.marker.icon({
+			 
+			          'marker-symbol': cluster.getChildCount(),
+			          'marker-color': '#ffcc80',
+			          'marker-size':'medium'
+			        });
+			      }
+			    });
+			var beverageMarker= new L.MarkerClusterGroup({
+			  
+			      iconCreateFunction: function(cluster) {
+			        return L.mapbox.marker.icon({
+			 
+			          'marker-symbol': cluster.getChildCount(),
+			          'marker-color': '#99ffff',
+			          'marker-size':'medium'
+			        });
+			      }
+			    });
+			var groceryMarker= new L.MarkerClusterGroup({
+			  
+			      iconCreateFunction: function(cluster) {
+			        return L.mapbox.marker.icon({
+			 
+			          'marker-symbol': cluster.getChildCount(),
+			          'marker-color': '#d98c8c',
+			          'marker-size':'medium'
+			        });
+			      }
+			    });
 
 		</script>
