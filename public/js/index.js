@@ -624,3 +624,28 @@ function clearClinic(){
   showHospitalMarker=false;
 }
  
+
+function saveLocation(){
+  //add all of the info to the statspage 
+  document.getElementById("placeName").innerHTML=thisPlace.name;
+  document.getElementById("placeImg").src=thisPlace.img;
+  var chart = c3.generate({
+            data: {
+                columns: [
+                    ['Food',thisPlace.food.length ],
+                    ['Beverage',thisPlace.beverage.length ],
+                    ['Grocery',thisPlace.grocery.length]
+                ],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5 // this makes bar width 50% of length between ticks
+                }
+                // or
+                //width: 100 // this makes bar width 100px
+            }
+        });
+}
+
+
