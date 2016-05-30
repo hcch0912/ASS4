@@ -685,12 +685,20 @@ function saveLocation(){
   //add all of the info to the statspage 
 
   if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
-  document.getElementById("placeName").innerHTML=thisPlace.name;
-  document.getElementById("placeImg").src=thisPlace.img;
+  // document.getElementById("placeName").innerHTML=thisPlace.name;
+  // document.getElementById("placeImg").src=thisPlace.img;
 
-  var parentNode=document.getElementById("statspage");
-  var sbling=parentNode.lastChild;
-  var newChild=sbling.cloneNode(true);
+  var parentNode=document.getElementById("savedPlaces");
+  var newDiv=document.createElement("div");
+      var nameSpan=document.createElement("span");
+          nameSpan.id=thisPlace.name;
+          nameSpan.innerHTML=thisPlace.name;
+      var img=document.createElement("img");
+          img.src=thisPlace.img;
+          img.style="width:20px;height:20px;"
+      newDiv.appendChild(nameSpan);
+      newDiv.appendChild(img);
+  parentNode.appendChild(newDiv);
   
   if(saveCount==0){
        chart= c3.generate({
@@ -715,7 +723,7 @@ function saveLocation(){
     });
   }
   }else{
-    alert("Please select the check box before saving this location");
+    alert("Please select all of the check box before saving this location");
   }
 }
 

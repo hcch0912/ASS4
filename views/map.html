@@ -45,18 +45,18 @@
 				<div class="information">
 					<b >nearest police station:</b>
 					<button onclick="showPolice()">show it</button>
-					<b id="nearestPolice">5 mi.</b>
+					<b id="nearestPolice"></b>
 					
 					<b >nearest clinic:</b> 
 					<button onclick="showClinic()">show it</button>
-					<b id=nearestHospital>8 mi</b>
+					<b id=nearestHospital></b>
 					
 				</div>
 			</div>
 			<div class="border"></div>
 			<a  class="w3-tooltip">
 			<h2>show nearby</h2>
-			<span class="w3-text">U may wanna avoid these!</span>
+			<span class="w3-text" style="color:red">U may wanna avoid these!</span>
 			</a>
 			<form id="places">
 			  <input type="checkbox" id="beverage"  name ="beverage" value="beverage" onclick="oncheck(this)" disabled> <span class="desc">Beverage</span>
@@ -83,9 +83,9 @@
 
 	<div id="statspage" class="change">
 		<!--<img src="https://i.gyazo.com/be36c4234886f63d677c68960a760c72.png"/>-->
-		<div id="place1">
+		<div id="savedPlaces" class="floating-box">
 			<span id="placeName"></span>
-			<div id="img"><img id="placeImg"></div>
+			<img id="placeImg">
 			<div id="policeDistanceCompare"></div>
 			<div id="hospitalDistanceCompare"></div>
 		</div>

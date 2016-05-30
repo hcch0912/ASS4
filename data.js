@@ -226,7 +226,7 @@ module.exports.getAroundBeverage=function(req,res){
 			}
 		var queryBeverage=client.query(selectBeverageQuery,function(err,res1){
 			if(res1){
-				console.log("res1");
+				
 				return res.send(JSON.stringify(res1.rows));
 			}else{
 				return res.status(500).json({success:false,data:err});
