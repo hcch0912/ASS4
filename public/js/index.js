@@ -30,7 +30,8 @@ var thisPlace={};
     thisPlace.showFoodMarker=false;
     thisPlace.showBeverageMarker=false;
     thisPlace.showGroceryMarker=false;
-
+var chart;
+var saveCount=0;
 
 function oncheck(element){
   element.checked=element.checked;
@@ -682,6 +683,7 @@ function clearClinic(){
 
 function saveLocation(){
   //add all of the info to the statspage 
+
   if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
   document.getElementById("placeName").innerHTML=thisPlace.name;
   document.getElementById("placeImg").src=thisPlace.img;
@@ -689,22 +691,29 @@ function saveLocation(){
   var parentNode=document.getElementById("statspage");
   var sbling=parentNode.lastChild;
   var newChild=sbling.cloneNode(true);
-
-  var chart = c3.generate({
-            data: {
-                columns: [
-                    ['Food',thisPlace.food.length ],
-                    ['Beverage',thisPlace.beverage.length ],
-                    ['Grocery',thisPlace.grocery.length]
-                ],
-                type: 'bar'
-            },
-            bar: {
-                width: {
-                    ratio: 0.5 // this makes bar width 50% of length between ticks
+  
+  if(saveCount==0){
+       chart= c3.generate({
+                data: {
+                    columns: [
+                        [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
+                    ],
+                    type: 'bar'
+                },
+                bar: {
+                    width: {
+                        ratio: 0.5 // this makes bar width 50% of length between ticks
+                    }
                 }
-            }
-        });
+      });
+      saveCount++;
+  }else{
+    chart.load({
+        columns: [
+           [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
+        ]
+    });
+  }
   }else{
     alert("Please select the check box before saving this location");
   }
