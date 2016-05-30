@@ -1,0 +1,37 @@
+{
+	"cemeteries": [
+		{
+			"name": "Oak Hill Memorial Park",
+			"latitude":	"33.1294738",
+			"longitude": "-117.0300303",	
+			"arces": "??",
+			"address": "2640 Glenridge Rd, Escondido, CA 92027",
+			"hours": "8:00am to 4:30pm. daily" ,
+			"phone": "(760) 745-1781",
+			"type": "cemetery",
+			"img": "http://www.northcountycemeterydistrict.com/images/locations/oak-hill.jpg"
+		},
+		{
+			"name": "San Marcos Cemetery",
+			"latitude":	"33.1604207",
+			"longitude": "-117.1521453",	
+			"arces": "??",
+			"address": "1021 Mulberry Dr, San Marcos, CA 92069 ",
+			"hours": "8:00am to 4:30pm, M-F" ,
+			"phone": "(760) 744-8921",
+			"type": "cemetery",
+			"img": "http://www.northcountycemeterydistrict.com/images/locations/san-marcos.jpg"
+		},
+		{
+			"name": "Pomerado Cemetery District/Dearborn Cemetery",
+			"latitude":	"32.9744851",
+			"longitude": "-117.0297835",	
+			"arces": "??",
+			"address": "14361 Tierra Bonita Road, Poway, California 92064",
+			"hours": "9:00am to 3:30pm. M-F" ,
+			"phone": "(858) 748-5760",
+			"type": "cemetery",
+			"img": "http://www.dearborncemetery.com/wp-content/uploads/2014/06/banner6.jpg"
+		}
+	]
+}
