@@ -23,6 +23,7 @@ $(document).ready( function () {
 //globle location variable
 
 var thisPlace={};
+  
     thisPlace.has=false;
     thisPlace.showPoliceMarker=false;
     thisPlace.showHospitalMarker=false;
@@ -115,8 +116,10 @@ function addParkMarker(){
                   });
                 }
                 map.addLayer(parkMarkers);
+
              }
     });
+
 }
 
 
@@ -126,6 +129,7 @@ function addParkMarker(){
 
 
 function addCemetryMarker(){
+
      $.ajax({
             type: 'GET',
             url: 'http://localhost:3000/delphi/getCemetry',            
@@ -154,7 +158,7 @@ function addCemetryMarker(){
                   });
                 }
                 map.addLayer(cemetryMarkers);
-            
+ 
              }
    });
 }
@@ -162,6 +166,7 @@ function addCemetryMarker(){
 
 
 function addCanyonsMarker(){
+
      $.ajax({
             type: 'GET',
             url: 'http://localhost:3000/delphi/getCanyons',            
@@ -193,7 +198,7 @@ function addCanyonsMarker(){
                   });
                 }
                 map.addLayer(parkMarkers);
-            
+
              }
    });
 }
@@ -247,7 +252,20 @@ function findme(){
     });
 }
 
+function enableCheckBox(){
+  document.getElementById("beverage").disabled=false;
+  document.getElementById("food").disabled=false;
+  document.getElementById("grocery").disabled=false;
+}
+
+function disableCheckBox(){
+  document.getElementById("beverage").disabled=true;
+  document.getElementById("food").disabled=true;
+  document.getElementById("grocery").disabled=true;
+}
+
 function getParkInfo(parkName){
+
   if(thisPlace.has==true){
   reset();
   }
@@ -264,6 +282,7 @@ function getParkInfo(parkName){
             success: function(data) {
                   document.getElementById("currplace").innerHTML=data.name;
                   document.getElementById("parkImg").src=data.img;
+                  enableCheckBox();
                   thisPlace=data;
                   thisPlace.has=true;
                   
@@ -289,6 +308,7 @@ function getCemeteryInfo(name){
             success: function(data) {
                   document.getElementById("currplace").innerHTML=data.name;
                   document.getElementById("parkImg").src=data.img;
+                  enableCheckBox();
                   thisPlace=data;
                   thisPlace.has=true;
                   
@@ -591,6 +611,7 @@ function addGroceryMarker(){
 }
 
 function reset(){
+
     document.getElementById("food").checked=false;
     document.getElementById("beverage").checked=false;
     document.getElementById("grocery").checked=false;
@@ -606,18 +627,19 @@ function reset(){
     map.removeLayer(hospitalMarker);
     thisPlace.showHospitalMarker==false;
     }
-    if(thisPlace.showGrocery==true){
+    if(thisPlace.showGroceryMarker==true){
       clearGrocery();
     }
-    if(thisPlace.showBeverage==true){
+    if(thisPlace.showBeverageMarker==true){
       clearBeverage();
     }
-    if(thisPlace.showFood==true){
+    if(thisPlace.showFoodMarker==true){
       clearFood();
     }
 
 }
 function clearCemetry(){
+  reset();
   map.removeLayer(cemetryMarkers);
   cemetryMarkers.clearLayers();
 
@@ -660,6 +682,7 @@ function clearClinic(){
 
 function saveLocation(){
   //add all of the info to the statspage 
+  if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
   document.getElementById("placeName").innerHTML=thisPlace.name;
   document.getElementById("placeImg").src=thisPlace.img;
 
@@ -682,7 +705,9 @@ function saveLocation(){
                 }
             }
         });
-
+  }else{
+    alert("Please select the check box before saving this location");
+  }
 }
 
 
