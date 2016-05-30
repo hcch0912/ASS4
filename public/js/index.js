@@ -130,29 +130,30 @@ function addCemetryMarker(){
             type: 'GET',
             url: 'http://localhost:3000/delphi/getCemetry',            
             success: function(data) {
+
                 var markerList=[];
                   
                 for(var i=0;i<data.length;i++){  
                     var title = data[i].name;
                     var marker = L.marker(new L.LatLng(data[i].latitude, data[i].longitude), {
-                        icon: L.mapbox.marker.icon({'marker-symbol': 'park', 'marker-color': '#2d862d'}),
+                        icon: L.mapbox.marker.icon({'marker-symbol': 'cemetery', 'marker-color': '#484848'}),
                         title: title
                     });
                     marker.bindPopup(title);
 
-                    parkMarkers.addLayer(marker);
+                    cemetryMarkers.addLayer(marker);
                     markerList.push(marker);
                 }
 
                 for(var i=0;i<markerList.length;i++){
                   
                   markerList[i].on('click',function(e){
-                    getParkInfo(e.target.options.title);
+                    getCemeteryInfo(e.target.options.title);
                     getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
                     getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
                   });
                 }
-                map.addLayer(parkMarkers);
+                map.addLayer(cemetryMarkers);
             
              }
    });
@@ -272,6 +273,31 @@ function getParkInfo(parkName){
    });
 }
 
+function getCemeteryInfo(name){
+  if(thisPlace.has==true){
+    reset();
+  }
+  var data={};
+  data.cemeteryName=name
+  var results={};
+   $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data:JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:3000/getCemeteryInfo',            
+            success: function(data) {
+                  document.getElementById("currplace").innerHTML=data.name;
+                  document.getElementById("parkImg").src=data.img;
+                  thisPlace=data;
+                  thisPlace.has=true;
+                  
+
+            
+             }
+   });  
+}
+
 function getNearestHospital(lat,lng){
 
   var data={};
@@ -323,7 +349,8 @@ function getNearestPolice(lat,lng){
                     results.avg=data.avgDis.avg;
                    
                     var hospitalName=document.getElementById("nearestPolice");
-                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
+                    hospitalName.innerHTML=results.name+"Distance:"+Math.round(results.distance * 100) / 100;
+
                     thisPlace.police={name:results.name,lat:results.lat,lng:results.lng};
 
              }
@@ -592,12 +619,16 @@ function reset(){
 }
 function clearCemetry(){
   map.removeLayer(cemetryMarkers);
+  cemetryMarkers.clearLayers();
+
 }
 function clearCanyons(){
   map.removeLayer(canyonsMarkers);
+  canyonsMarkers.clearLayers();
 }
 function clearPark(){
   map.removeLayer(parkMarkers);
+  parkMarkers.clearLayers();
 }
 function clearFood(){
   map.removeLayer(foodMarker);

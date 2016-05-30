@@ -43,11 +43,12 @@ app.get('/getParks', function(req,res){
 	var locationData = require('./parks.json');
   	res.send(locationData.parks);
 });
-app.get('/delphi/getCemetry',dataEndpoint.getCemetryData);
+app.get('/delphi/getCemetry',dataEndpoint.getCemetry);
 //app.get('/delphi/getCanyons',dataEndpoint.getCanyonsData);
 
 
 app.post('/getParkInfo',dataEndpoint.getParkData);
+app.post('/getCemeteryInfo',dataEndpoint.getCemetryData);
 app.post('/delphidata/hospital',dataEndpoint.getNearestHospitalData);
 app.post('/delphidata/police',dataEndpoint.getNearestPoliceData);
 

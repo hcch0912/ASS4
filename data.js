@@ -158,29 +158,27 @@ module.exports.getNearestPoliceData=function(req,res){
 	});
 }
 
-module.exports.getCemetryData=function(req,res){
-	
-	var selectCemetryQuery=
-	"select \"DISTRICT\" , ST_Y(ST_TRANSFORM(geom, 4326)) as x, ST_X(ST_TRANSFORM(geom, 4326)) as y "+
-	"from sandag_cemetery_project";
+module.exports.getCemetry=function(req,res){
 
-	pg.connect(conString,function(err,client,done){
-		if(err){
-			done();
-			
-			return res.status(500).json({success:false,data:err});
-		}
-		var queryCemetry=client.query(selectCemetryQuery,function(err,res1){
-			if(res1){
-				console.log("res1");
-				return res.send(JSON.stringify(res1));
-			}else{
-				return res.status(500).json({success:false,data:err});
-			}
-		});
-	});
+	var cemeteryData = require('./cemeteries.json');
+	res.send(cemeteryData.cemeteries);
+
 };
 
+module.exports.getCemetryData=function(req,res){
+
+	var parkName=req.body.cemeteryName;
+
+	var parksData = require('./cemeteries.json');
+	
+	for(var i=0;i<parksData.cemeteries.length;i++){
+	
+		if(parksData.cemeteries[i].name==parkName){
+			return res.send(JSON.stringify(parksData.cemeteries[i]));
+		}
+	}
+
+}
 
 module.exports.getAroundFood=function(req,res){
 		var target_X=req.body.lat;
