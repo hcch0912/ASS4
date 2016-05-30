@@ -425,7 +425,7 @@ function showClinic(){
           }
       });
       hospitalMarker.addTo(map);
-      thisPlace.showPoliceMarker=true;
+      thisPlace.showHospitalMarker=true;
   }
 }
 

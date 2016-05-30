@@ -190,7 +190,7 @@ module.exports.getAroundFood=function(req,res){
 		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+foodTable+
 		" where "+disEquation+
-		" <0.03 limit 100";
+		" <0.03 limit 99";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -217,7 +217,7 @@ module.exports.getAroundBeverage=function(req,res){
 		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+BeverageTable+
 		" where "+disEquation+
-		" <0.03 limit 100";
+		" <0.03 limit 99";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -244,7 +244,7 @@ module.exports.getAroundGrocery=function(req,res){
 		"select ST_X(ST_TRANSFORM(geom, 4326)), ST_Y(ST_TRANSFORM(geom, 4326)) ,\"OWNNAM1\" "+
 		" from "+groceryTable+
 		" where "+disEquation+
-		" <0.03 limit 100";
+		" <0.03 limit 99";
 
 		pg.connect(conString,function(err,client,done){
 			if(err){
@@ -253,7 +253,7 @@ module.exports.getAroundGrocery=function(req,res){
 			}
 		var queryGrocery=client.query(selectGroceryQuery,function(err,res1){
 			if(res1){
-				console.log("res1");
+				
 				return res.send(JSON.stringify(res1.rows));
 			}else{
 				return res.status(500).json({success:false,data:err});
