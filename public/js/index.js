@@ -55,6 +55,11 @@ function oncheck(element){
         case "grocery":
           showGrocery();
           break;
+        case "police":
+          showPolice();
+          break;
+        case "hospital":
+          showClinic();
         default:
           break;
       }
@@ -78,6 +83,11 @@ function oncheck(element){
         case "grocery":
           clearGrocery();
           break;
+        case "police":
+          clearPolice();
+          break;
+        case "hospital":
+          clearClinic();
         default:
           break;
       }
@@ -257,6 +267,8 @@ function enableCheckBox(){
   document.getElementById("beverage").disabled=false;
   document.getElementById("food").disabled=false;
   document.getElementById("grocery").disabled=false;
+  document.getElementById("police").disabled=false;
+  document.getElementById("hospital").disabled=false;
 }
 
 function disableCheckBox(){
@@ -287,7 +299,6 @@ function getParkInfo(parkName){
                   thisPlace=data;
                   thisPlace.has=true;
                   
-
             
              }
    });
@@ -335,13 +346,17 @@ function getNearestHospital(lat,lng){
             contentType: 'application/json',
             url: 'http://localhost:3000/delphidata/hospital',            
             success: function(data) {
+              if(data){
                     results.name=data.nearest.OWNNAM1;
                     results.distance=data.nearest.dis;
                     results.avg=data.avgDis.avg;
-                   
                     var hospitalName=document.getElementById("nearestHospital");
                     hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
-                    thisPlace.hospital={name:results.name,lat:data.nearest.st_x,lng:data.nearest.st_y};      
+                    thisPlace.hospital={name:results.name,lat:data.nearest.st_x,lng:data.nearest.st_y};
+              }else{
+                alert("Sorry,we failed to retrieve data from database,please retry");
+              }
+                          
              }
    });
   }
@@ -363,6 +378,7 @@ function getNearestPolice(lat,lng){
             contentType: 'application/json',
             url: 'http://localhost:3000/delphidata/police',            
             success: function(data) {
+              if(data){
                     results.name=data.nearest.FACILITY;
                     results.lat=data.nearest.st_x;
                     results.lng=data.nearest.st_y;
@@ -373,8 +389,13 @@ function getNearestPolice(lat,lng){
                     hospitalName.innerHTML=results.name+"Distance:"+Math.round(results.distance * 100) / 100;
 
                     thisPlace.police={name:results.name,lat:results.lat,lng:results.lng};
+              }else{
+                    alert("Sorry,we failed to retrieve data from database,please retry");
+              }
+                    
 
              }
+          
    });
   }
 
@@ -402,6 +423,7 @@ function showPolice(){
       policeMarker.addTo(map);
       thisPlace.showPoliceMarker=true;
   }
+  document.getElementById("police").innerHTML="Hide it";
 }
 
 function showClinic(){
@@ -427,6 +449,7 @@ function showClinic(){
       hospitalMarker.addTo(map);
       thisPlace.showHospitalMarker=true;
   }
+
 }
 
 
@@ -443,20 +466,26 @@ function showFood(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/food',            
                 success: function(data) {
-                  if(data.length>0){
-                    for(var i=0;i<data.length;i++){
-                        results.push({name:data[i].OWNNAM1,
-                                      lat:data[i].st_x,
-                                      lng:data[i].st_y
-                                    });
-                    }
+                  if(data){
+                      if(data.length>0){
+                          for(var i=0;i<data.length;i++){
+                              results.push({name:data[i].OWNNAM1,
+                                            lat:data[i].st_x,
+                                            lng:data[i].st_y
+                                          });
+                      }
                           thisPlace.food=results;
                           addFoodMarker();
                    
+                      }else{
+                        document.getElementById("foodMsg").innerHTML="No Food";
+                        thisPlace.food=false;
+                      }
+
                   }else{
-                    document.getElementById("foodMsg").innerHTML="No Food";
+                      alert("Sorry,we failed to retrieve data from database,please retry");
                   }
-              }
+                                }
        });
   }else{
     console.log("msg you didn't select any thing ");
@@ -474,19 +503,25 @@ function showBeverage(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/beverage',            
                 success: function(data) {
-                  if(data.length>0){
-                      for(var i=0;i<data.length;i++){
-                          results.push({name:data[i].OWNNAM1,
-                                        lat:data[i].st_x,
-                                        lng:data[i].st_y
-                                      });
-                      }     
-                            thisPlace.beverage=results;
-                            addBeverageMarker();
-                     
+                  if(data){
+                        if(data.length>0){
+                            for(var i=0;i<data.length;i++){
+                                results.push({name:data[i].OWNNAM1,
+                                              lat:data[i].st_x,
+                                              lng:data[i].st_y
+                                            });
+                            }     
+                                  thisPlace.beverage=results;
+                                  addBeverageMarker();
+                           
+                        }else{
+                          document.getElementById("beverageMsg").innerHTML="No Beverage";
+                          thisPlace.beverage=false;
+                        }
                   }else{
-                    document.getElementById("beverageMsg").innerHTML="No Beverage";
+                        alert("Sorry,we failed to retrieve data from database,please retry");
                   }
+                  
               }
        });
   }else{
@@ -505,19 +540,25 @@ function showGrocery(){
                 contentType: 'application/json',
                 url: 'http://localhost:3000/delphi/grocery',            
                 success: function(data) {
-                  if(data.length>0){
-                    for(var i=0;i<data.length;i++){
-                      results.push({name:data[i].OWNNAM1,
-                                    lat:data[i].st_x,
-                                    lng:data[i].st_y
-                                  });
-                     }
+                  if(data){
+                    if(data.length>0){
+                        for(var i=0;i<data.length;i++){
+                          results.push({name:data[i].OWNNAM1,
+                                        lat:data[i].st_x,
+                                        lng:data[i].st_y
+                                      });
+                         }
 
-                        thisPlace.grocery=results;
-                        addGroceryMarker();
-                }else{
-                    document.getElementById("groceryMsg").innerHTML="No Grocery";
-                }
+                            thisPlace.grocery=results;
+                            addGroceryMarker();
+                    }else{
+                        document.getElementById("groceryMsg").innerHTML="No Grocery";
+                        thisPlace.grocery=false;
+                    }
+                  }else{
+                     alert("Sorry,we failed to retrieve data from database,please retry");
+                  }
+                  
             }
        });
   }else{
@@ -674,10 +715,12 @@ function clearGrocery(){
 function clearPolice(){
   map.removeLayer(policeMarker);
   showPoliceMarker=false;
+  
 }
 function clearClinic(){
   map.removeLayer(hospitalMarker);
-  showHospitalMarker=false;
+  showHospitalMarker=false;F
+  d
 }
  
 
@@ -685,9 +728,7 @@ function saveLocation(){
   //add all of the info to the statspage 
 
   if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
-  // document.getElementById("placeName").innerHTML=thisPlace.name;
-  // document.getElementById("placeImg").src=thisPlace.img;
-
+    if(thisPlace.food)
   var parentNode=document.getElementById("savedPlaces");
   var newDiv=document.createElement("div");
       var nameSpan=document.createElement("span");

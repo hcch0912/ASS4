@@ -41,14 +41,16 @@
 
 			<div class="entry">
 				<img  id="parkImg"  src="" class="placeimg"/>
-				<div  id="currplace" class="placename">name of place</div>
+				<div  id="currplace" class="placename"></div>
 				<div class="information">
 					<b >nearest police station:</b>
-					<button onclick="showPolice()">show it</button>
+					find it on map
+					<input type="checkbox" name="police" id="police" value="show it" onclick="oncheck(this)" disabled/>
 					<b id="nearestPolice"></b>
 					
 					<b >nearest clinic:</b> 
-					<button onclick="showClinic()">show it</button>
+					map it on map
+					<input type="checkbox" name="hospital" name="hospital" onclick="oncheck(this)" value="show it" disabled/>
 					<b id=nearestHospital></b>
 					
 				</div>
@@ -83,7 +85,7 @@
 
 	<div id="statspage" class="change">
 		<!--<img src="https://i.gyazo.com/be36c4234886f63d677c68960a760c72.png"/>-->
-		<div id="savedPlaces" class="floating-box">
+		<div id="savedPlaces" class="savedContainer">
 			<span id="placeName"></span>
 			<img id="placeImg">
 			<div id="policeDistanceCompare"></div>

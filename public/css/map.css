@@ -201,3 +201,17 @@ html, body {
 	color: #ffffff;
 	margin: 15px 0px 5px 0px;
 }
+
+.savedContainer {
+  width: 400px;
+  
+  white-space: nowrap;
+  overflow: scroll;
+}
+
+.savedContainer > div {
+  height: 50px;
+  width: 100px;
+  display: inline-block;
+  margin: 10px;
+}
