@@ -122,10 +122,12 @@ function addParkMarker(){
                   
                   markerList[i].on('click',function(e){
                     getParkInfo(e.target.options.title);
-                    
                     getNearestHospital(e.target._latlng.lat,e.target._latlng.lng);
-
-                    console.log(thisPlace);
+                    getNearestPolice(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearFood(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearBeverage(e.target._latlng.lat,e.target._latlng.lng);
+                    getNearGrocery(e.target._latlng.lat,e.target._latlng.lng);
+                    localStorage.setItem(thisPlace.name,thisPlace);
                     
                   });
                 }
@@ -172,8 +174,7 @@ function addCemetryMarker(){
                     getNearFood(e.target._latlng.lat,e.target._latlng.lng);
                     getNearBeverage(e.target._latlng.lat,e.target._latlng.lng);
                     getNearGrocery(e.target._latlng.lat,e.target._latlng.lng);
-
-                    console.log(thisPlace);
+                    localStorage.setItem(thisPlace.name,thisPlace);
                   });
                 }
                 map.addLayer(cemetryMarkers);
@@ -318,6 +319,10 @@ function getCemeteryInfo(name){
   if(thisPlace.has==true){
     reset();
   }
+  
+  if(localStorage.getItem(thisPlace.name)!=null);
+  
+  
   var data={};
   data.cemeteryName=name
 
@@ -358,11 +363,12 @@ function getNearestHospital(lat,lng){
             success: function(dataRes) {
               if(dataRes){
                     results.name=dataRes.nearest.OWNNAM1;
-                    results.distance=dataRes.nearest.dis;
-                    results.avg=dataRes.avgDis.avg;
+                    results.distance=Math.round(dataRes.nearest.dis*100)/100;
+                    results.avg=Math.round(dataRes.avgDis.avg*100)/100;
                     var hospitalName=document.getElementById("nearestHospital");
-                    hospitalName.innerHTML=results.name+" "+Math.round(results.distance * 100) / 100;
-                    thisPlace.hospital={name:results.name,lat:dataRes.nearest.st_x,lng:dataRes.nearest.st_y};
+                    hospitalName.innerHTML=results.name+" "+results.distance ;
+                    thisPlace.hospital={name:results.name,lat:dataRes.nearest.st_x,lng:dataRes.nearest.st_y,dis:results.distance,avgDis:results.avg};
+
               }else{
                 alert("Sorry,we failed to retrieve data from database,please retry");
               }
@@ -388,18 +394,18 @@ function getNearestPolice(lat,lng){
             data: JSON.stringify(data),
             contentType: 'application/json',
             url: 'http://localhost:3000/delphidata/police',            
-            success: function(data) {
+            success: function(dataRes) {
               if(data){
-                    results.name=data.nearest.FACILITY;
-                    results.lat=data.nearest.st_x;
-                    results.lng=data.nearest.st_y;
-                    results.distance=data.nearest.dis;
-                    results.avg=data.avgDis.avg;
+                    results.name=dataRes.nearest.FACILITY;
+                    results.lat=dataRes.nearest.st_x;
+                    results.lng=dataRes.nearest.st_y;
+                    results.distance=Math.round(dataRes.nearest.dis*100)/100;
+                    results.avg=Math.round(dataRes.avgDis.avg*100)/100;
                    
                     var hospitalName=document.getElementById("nearestPolice");
-                    hospitalName.innerHTML=results.name+"Distance:"+Math.round(results.distance * 100) / 100;
+                    hospitalName.innerHTML=results.name+"Distance:"+results.distance;
 
-                    thisPlace.police={name:results.name,lat:results.lat,lng:results.lng};
+                    thisPlace.police={name:results.name,lat:results.lat,lng:results.lng,dis:results.distance,avgDis:results.avg};
               }else{
                     alert("Sorry,we failed to retrieve data from database,please retry");
               }
@@ -744,14 +750,22 @@ function saveLocation(){
     if(thisPlace.food)
   var parentNode=document.getElementById("savedPlaces");
   var newDiv=document.createElement("div");
-      var nameSpan=document.createElement("span");
-          nameSpan.id=thisPlace.name;
-          nameSpan.innerHTML=thisPlace.name;
+      var nameDiv=document.createElement("div");
+          nameDiv.id=thisPlace.name;
+          nameDiv.innerHTML=thisPlace.name;
       var img=document.createElement("img");
           img.src=thisPlace.img;
-          img.style="width:20px;height:20px;"
-      newDiv.appendChild(nameSpan);
+          img.style="width:200px;height:200px;"
+      var policeDiv=document.createElement("div");
+          policeDiv.id=thisPlace.name+"police";
+          policeDiv.innerHTML=thisPlace.police.name +"<br>distance:"+thisPlace.police.dis+"<br>average distance:"+thisPlace.police.avgDis ;
+      var hospitalDiv=document.createElement("div");
+          hospitalDiv.id=thisPlace.name+"hospital";
+          hospitalDiv.innerHTML=thisPlace.hospital.name+"<br>distance:"+thisPlace.hospital.dis+"<br>average distance:"+thisPlace.hospital.avgDis ;
+      newDiv.appendChild(nameDiv);
       newDiv.appendChild(img);
+      newDiv.appendChild(policeDiv);
+      newDiv.appendChild(hospitalDiv);
   parentNode.appendChild(newDiv);
   
   if(saveCount==0){
@@ -764,7 +778,7 @@ function saveLocation(){
                 },
                 bar: {
                     width: {
-                        ratio: 0.5 // this makes bar width 50% of length between ticks
+                        ratio: 0.5 
                     }
                 }
       });
