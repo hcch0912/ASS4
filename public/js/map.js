@@ -23,15 +23,15 @@ $(document).ready( function () {
 		if( !scrolled ){
 			$('#statspage').css('margin-top','0px');
 			$('#scrollhere').text("go back to map");
-			$('#dragin').css('opacity','0');
-			$('#infoin').css('opacity','0');
+			$('#dragme').css('opacity','0');
+			$('#infome').css('opacity','0');
 			scrolled = true;
 		}
 		else {
-			$('#statspage').css('margin-top','80%');
+			$('#statspage').css('margin-top','100%');
 			$('#scrollhere').text("view saved locations");
-			$('#dragme').css('opacity','1');
-			$('#infome').css('opacity','1');
+			$('#dragme').css('opacity','.99');
+			$('#infome').css('opacity','.99');
 			scrolled = false;
 		}
 	});
