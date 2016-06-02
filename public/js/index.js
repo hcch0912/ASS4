@@ -369,7 +369,8 @@ function getNearestHospital(lat,lng){
                     results.distance=Math.round(dataRes.nearest.dis*100)/100;
                     results.avg=Math.round(dataRes.avgDis.avg*100)/100;
                     var hospitalName=document.getElementById("nearestHospital");
-                    hospitalName.innerHTML=results.name+" "+results.distance ;
+                    hospitalName.innerHTML="<em>"+results.name+"</em>"+
+                    "<br>"+results.distance+" mi." ;
                     thisPlace.hospital={name:results.name,lat:dataRes.nearest.st_x,lng:dataRes.nearest.st_y,dis:results.distance,avgDis:results.avg};
 
               }else{
@@ -406,8 +407,9 @@ function getNearestPolice(lat,lng){
                     results.distance=Math.round(dataRes.nearest.dis*100)/100;
                     results.avg=Math.round(dataRes.avgDis.avg*100)/100;
                    
-                    var hospitalName=document.getElementById("nearestPolice");
-                    hospitalName.innerHTML=results.name+"Distance:"+results.distance;
+                    var stationName=document.getElementById("nearestPolice");
+                    stationName.innerHTML="<em>"+results.name+"</em>"+
+                    "<br>"+results.distance+" mi.";
 
                     thisPlace.police={name:results.name,lat:results.lat,lng:results.lng,dis:results.distance,avgDis:results.avg};
               }else{
@@ -756,20 +758,37 @@ function saveLocation(){
   var newDiv=document.createElement("div");
       var nameDiv=document.createElement("div");
           nameDiv.id=thisPlace.name;
-          nameDiv.innerHTML=thisPlace.name;
+          nameDiv.innerHTML="<h3>"+thisPlace.name+"</h3>";
       var img=document.createElement("img");
           img.src=thisPlace.img;
-          img.style="width:200px;height:200px;"
-      var policeDiv=document.createElement("div");
-          policeDiv.id=thisPlace.name+"police";
-          policeDiv.innerHTML=thisPlace.police.name +"<br>distance:"+thisPlace.police.dis+"<br>average distance:"+thisPlace.police.avgDis ;
-      var hospitalDiv=document.createElement("div");
-          hospitalDiv.id=thisPlace.name+"hospital";
-          hospitalDiv.innerHTML=thisPlace.hospital.name+"<br>distance:"+thisPlace.hospital.dis+"<br>average distance:"+thisPlace.hospital.avgDis ;
+          //img.style="width:200px;height:200px;"
+      var infoDiv = document.createElement("div");
+          infoDiv.id = "moreInfo";
+          infoDiv.innerHTML = 
+            "<p>" + 
+            "<h4>nearest police station:</h4>" + 
+            "<p><em>" + thisPlace.police.name + "</em>" + 
+            "<br><b class = 'moreDist'>" + thisPlace.police.dis + "</b> mi." + 
+            "<br>(avg. <b>" + thisPlace.police.avgDis + "</b> mi.)</p>" + 
+            "<p>" +
+            "<h4>nearest hospital:</h4>" + 
+            "<p><em>" + thisPlace.hospital.name + "</em>" + 
+            "<br><b class = 'moreDist'>" + thisPlace.hospital.dis + "</b> mi." + 
+            "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>";
+      // var policeDiv=document.createElement("div");
+      //     policeDiv.id=thisPlace.name+"police";
+      //     policeDiv.innerHTML="<b>nearest police station:</b>"+
+      //       "<p><em>"+thisPlace.police.name+"</em>"+
+      //       "<br><b>"+thisPlace.police.dis+"</b> mi."+
+      //       "<p>most locations are <b>"+thisPlace.police.avgDis+"</b> mi. from their nearest station." ;
+      // var hospitalDiv=document.createElement("div");
+      //     hospitalDiv.id=thisPlace.name+"hospital";
+      //     hospitalDiv.innerHTML=thisPlace.hospital.name+"<br>distance:"+thisPlace.hospital.dis+"<br>average distance:"+thisPlace.hospital.avgDis ;
       newDiv.appendChild(nameDiv);
       newDiv.appendChild(img);
-      newDiv.appendChild(policeDiv);
-      newDiv.appendChild(hospitalDiv);
+      newDiv.appendChild(infoDiv);
+      // newDiv.appendChild(policeDiv);
+      // newDiv.appendChild(hospitalDiv);
   parentNode.appendChild(newDiv);
   
   if(saveCount==0){

@@ -15,8 +15,8 @@
 
 			<div class="border"></div>
 			<section>
-			<h2>Where are U?</h2>
-			<button onclick="findme()">Find Me</button><br>
+			<h2>where are you?</h2>
+			<button onclick="findme()" class="locationbutton">find me!</button><br>
 			<a id="geolocate"> </a>
 			</section>
 			<h2>where to?</h2>
@@ -37,37 +37,40 @@
 
 	<div id="infome" class="change">
 		<div id="infoin">
-			<div class="solosd">information</div>
+			<!--<div class="solosd">information</div>-->
 
 			<div class="entry">
-				<img  id="parkImg"  src="" class="placeimg"/>
-				<div  id="currplace" class="placename"></div>
+				<img  id="parkImg"  src="imgs/noimg.png" class="placeimg"/>
+				<div  id="currplace" class="placename">click a place to explore!</div>
 				<div class="information">
-					<b >nearest police station:</b>
-					find it on map
-					<input type="checkbox" name="police" id="police" value="show it" onclick="oncheck(this)" disabled/>
-					<b id="nearestPolice"></b>
+					<b>nearest police station:</b>
+					<p id="nearestPolice"></p>
+					<form id="showpolice">
+						<input type="checkbox" name="police" id="police" value="show it" onclick="oncheck(this)" disabled/>
+						show on map
+					</form>
 					
-					<b >nearest clinic:</b> 
-					map it on map
-					<input type="checkbox" name="hospital" id="hospital" name="hospital" onclick="oncheck(this)" value="show it" disabled/>
-					<b id=nearestHospital></b>
+					<b>nearest clinic:</b> 
+					<p id=nearestHospital></p>
+					<form id="showhosp">
+						<input type="checkbox" name="hospital" id="hospital" name="hospital" onclick="oncheck(this)" value="show it" disabled/>
+						show on map
+					</form>
 					
 				</div>
 			</div>
 			<div class="border"></div>
-			<a  class="w3-tooltip">
-			<h2>show nearby</h2>
-			<span class="w3-text" style="color:red">U may wanna avoid these!</span>
-			</a>
+			<!--<a  class="w3-tooltip">-->
+			<h2>show nearby:</h2>
+			<!--<span class="w3-text" style="color:red">U may wanna avoid these!</span>-->
+			<!--</a>-->
 			<form id="places">
-			  <input type="checkbox" id="beverage"  name ="beverage" value="beverage" onclick="oncheck(this)" disabled> <span class="desc">Beverage</span>
-			  <span class="desc" id="beverageMsg"></span><br>
-
-			  <input type="checkbox" id="food" name="food" value="food" onclick="oncheck(this)" disabled> <span class="desc">Food</span>
+			  <input type="checkbox" id="food" name="food" value="food" onclick="oncheck(this)" disabled> <span class="desc">food</span>
 			  <span class="desc" id="foodMsg"></span><br>
+			  <input type="checkbox" id="beverage"  name ="beverage" value="beverage" onclick="oncheck(this)" disabled> <span class="desc">drinks</span>
+			  <span class="desc" id="beverageMsg"></span><br>
 			  <input type="checkbox" id="grocery" value="grocerys" name="grocery" onclick="oncheck(this)" disabled>
-			  <span class="desc">Grocery</span>
+			  <span class="desc">grocery stores</span>
 			  <span class="desc" id="groceryMsg"></span>
 			</form>
 
