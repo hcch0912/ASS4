@@ -753,66 +753,60 @@ function saveLocation(){
   //add all of the info to the statspage 
 
   if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
-    if(thisPlace.food)
-  var parentNode=document.getElementById("savedPlaces");
-  var newDiv=document.createElement("div");
-      var nameDiv=document.createElement("div");
-          nameDiv.id=thisPlace.name;
-          nameDiv.innerHTML="<h3>"+thisPlace.name+"</h3>";
-      var img=document.createElement("img");
-          img.src=thisPlace.img;
-          //img.style="width:200px;height:200px;"
-      var infoDiv = document.createElement("div");
-          infoDiv.id = "moreInfo";
-          infoDiv.innerHTML = 
-            "<p>" + 
-            "<h4>nearest police station:</h4>" + 
-            "<p><em>" + thisPlace.police.name + "</em>" + 
-            "<br><b class = 'moreDist'>" + thisPlace.police.dis + "</b> mi." + 
-            "<br>(avg. <b>" + thisPlace.police.avgDis + "</b> mi.)</p>" + 
-            "<p>" +
-            "<h4>nearest hospital:</h4>" + 
-            "<p><em>" + thisPlace.hospital.name + "</em>" + 
-            "<br><b class = 'moreDist'>" + thisPlace.hospital.dis + "</b> mi." + 
-            "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>";
-      // var policeDiv=document.createElement("div");
-      //     policeDiv.id=thisPlace.name+"police";
-      //     policeDiv.innerHTML="<b>nearest police station:</b>"+
-      //       "<p><em>"+thisPlace.police.name+"</em>"+
-      //       "<br><b>"+thisPlace.police.dis+"</b> mi."+
-      //       "<p>most locations are <b>"+thisPlace.police.avgDis+"</b> mi. from their nearest station." ;
-      // var hospitalDiv=document.createElement("div");
-      //     hospitalDiv.id=thisPlace.name+"hospital";
-      //     hospitalDiv.innerHTML=thisPlace.hospital.name+"<br>distance:"+thisPlace.hospital.dis+"<br>average distance:"+thisPlace.hospital.avgDis ;
-      newDiv.appendChild(nameDiv);
-      newDiv.appendChild(img);
-      newDiv.appendChild(infoDiv);
-      // newDiv.appendChild(policeDiv);
-      // newDiv.appendChild(hospitalDiv);
-  parentNode.appendChild(newDiv);
-  
-  if(saveCount==0){
-       chart= c3.generate({
-                data: {
-                    columns: [
-                        [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
-                    ],
-                    type: 'bar'
-                },
-                bar: {
-                    width: {
-                        ratio: 0.5 
+      if(!thisPlace.saved==true){
+          var parentNode=document.getElementById("savedPlaces");
+          var newDiv=document.createElement("div");
+          var nameDiv=document.createElement("div");
+              nameDiv.id=thisPlace.name;
+              nameDiv.innerHTML="<h3>"+thisPlace.name+"</h3>";
+          var img=document.createElement("img");
+              img.src=thisPlace.img;
+              //img.style="width:200px;height:200px;"
+          var infoDiv = document.createElement("div");
+              infoDiv.id = "moreInfo";
+              infoDiv.innerHTML = 
+                "<p>" + 
+                "<h4>nearest police station:</h4>" + 
+                "<p><em>" + thisPlace.police.name + "</em>" + 
+                "<br><b class = 'moreDist'>" + thisPlace.police.dis + "</b> mi." + 
+                "<br>(avg. <b>" + thisPlace.police.avgDis + "</b> mi.)</p>" + 
+                "<p>" +
+                "<h4>nearest hospital:</h4>" + 
+                "<p><em>" + thisPlace.hospital.name + "</em>" + 
+                "<br><b class = 'moreDist'>" + thisPlace.hospital.dis + "</b> mi." + 
+                "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>";
+          newDiv.appendChild(nameDiv);
+          newDiv.appendChild(img);
+          newDiv.appendChild(infoDiv);
+          parentNode.appendChild(newDiv);
+      
+        if(saveCount==0){
+            chart= c3.generate({
+                    data: {
+                        columns: [
+                            [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
+                        ],
+                        type: 'bar'
+                    },
+                    bar: {
+                        width: {
+                            ratio: 0.5 
+                        }
                     }
-                }
-      });
-      saveCount++;
-  }else{
-    chart.load({
-        columns: [
-           [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
-        ]
-    });
-  }
+            });
+            saveCount++;
+        }else{
+            chart.load({
+                columns: [
+                   [thisPlace.name,thisPlace.food.length,thisPlace.beverage.length,thisPlace.grocery.length ]
+                ]
+            });
+        }
+        thisPlace.saved=true;
+      }else{
+        alert("Already Saved");
+      }
+          
   }else{
     alert("Sorry,data missing");
   }
