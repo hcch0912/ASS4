@@ -101,7 +101,7 @@ function addParkMarker(){
 
     $.ajax({
             type: 'GET',
-            url: 'http://localhost:3000/getParks',            
+            url: '/getParks',            
             success: function(data) {
 
                 
