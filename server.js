@@ -57,6 +57,6 @@ app.post('/delphi/beverage',dataEndpoint.getAroundBeverage);
 app.post('/delphi/grocery',dataEndpoint.getAroundGrocery);
 
 
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port')||process.env.PORT, function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
