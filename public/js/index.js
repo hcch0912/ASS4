@@ -149,7 +149,7 @@ function addCemetryMarker(){
 
      $.ajax({
             type: 'GET',
-            url: 'http://localhost:3000/delphi/getCemetry',            
+            url: '/delphi/getCemetry',            
             success: function(data) {
 
                 var markerList=[];
@@ -190,7 +190,7 @@ function addCanyonsMarker(){
 
      $.ajax({
             type: 'GET',
-            url: 'http://localhost:3000/delphi/getCanyons',            
+            url: '/delphi/getCanyons',            
             success: function(data) {
                 var markerList=[];
                   
