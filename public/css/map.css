@@ -265,3 +265,8 @@ html, body {
 #moreInfo .moreDist {
 	font-size: 20px;
 }
+
+.barChart {
+	margin: 0px auto 100px auto;
+	width: 75%;
+}

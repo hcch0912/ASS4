@@ -2,8 +2,8 @@ $(document).ready( function () {
 	var closed = false;
 	var scrolled = false;
 
-	$('#dragme').draggable();
-	$('#infome').draggable();
+	$('#left').draggable();
+	$('#right').draggable();
 
 	$('#collapse').click(function() {
 		if (!closed ) {
