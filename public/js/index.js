@@ -303,7 +303,7 @@ function getParkInfo(parkName){
             dataType: 'json',
             data:JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:3000/getParkInfo',            
+            url: '/getParkInfo',            
             success: function(dataRes) {
                   
                   document.getElementById("currplace").innerHTML=dataRes.name;
@@ -335,7 +335,7 @@ function getCemeteryInfo(name){
             dataType: 'json',
             data:JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:3000/getCemeteryInfo',            
+            url: '/getCemeteryInfo',            
             success: function(dataRes) {
                  
                   document.getElementById("currplace").innerHTML=dataRes.name;
@@ -362,7 +362,7 @@ function getNearestHospital(lat,lng){
             dataType: 'json',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:3000/delphidata/hospital',            
+            url: '/delphidata/hospital',            
             success: function(dataRes) {
               if(dataRes){
                     results.name=dataRes.nearest.OWNNAM1;
@@ -397,7 +397,7 @@ function getNearestPolice(lat,lng){
             dataType: 'json',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:3000/delphidata/police',            
+            url: '/delphidata/police',            
             success: function(dataRes) {
               if(data){
 
@@ -488,7 +488,7 @@ function getNearFood(lat,lng){
                 dataType: 'json',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                url: 'http://localhost:3000/delphi/food',            
+                url: '/delphi/food',            
                 success: function(dataRes) {
                   if(dataRes){
                       if(dataRes.length>0){
@@ -525,7 +525,7 @@ function getNearBeverage(lat,lng){
                 dataType: 'json',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                url: 'http://localhost:3000/delphi/beverage',            
+                url: '/delphi/beverage',            
                 success: function(dataRes) {
                   if(dataRes){
                         if(dataRes.length>0){
@@ -562,7 +562,7 @@ function getNearGrocery(lat,lng){
                 dataType: 'json',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                url: 'http://localhost:3000/delphi/grocery',            
+                url: '/delphi/grocery',            
                 success: function(dataRes) {
                   if(dataRes){
                     if(dataRes.length>0){
