@@ -503,7 +503,7 @@ function getNearFood(lat,lng){
                    
                       }else{
                         
-                        thisPlace.food=false;
+                        thisPlace.food=[];
                       }
 
                   }else{
@@ -540,7 +540,7 @@ function getNearBeverage(lat,lng){
                            
                         }else{
                           
-                          thisPlace.beverage=false;
+                          thisPlace.beverage=[];
                         }
                   }else{
                         alert("Sorry,we failed to retrieve data from database,please retry");
@@ -577,7 +577,7 @@ function getNearGrocery(lat,lng){
                             
                     }else{
                        
-                        thisPlace.grocery=false;
+                        thisPlace.grocery=[];
                     }
                   }else{
                      alert("Sorry,we failed to retrieve data from database,please retry");
@@ -814,7 +814,7 @@ function saveLocation(){
     });
   }
   }else{
-    alert("Please select all of the check box before saving this location");
+    alert("Sorry,data missing");
   }
 }
 
