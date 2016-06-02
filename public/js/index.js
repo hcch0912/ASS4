@@ -21,7 +21,8 @@ $(document).ready( function () {
 });
 
 //globle location variable
-
+var hospitalAjax;
+var policeAjax;
 var thisPlace={};
   
     thisPlace.has=false;
@@ -290,6 +291,8 @@ function getParkInfo(parkName){
 
   if(thisPlace.has==true){
   reset();
+  policeAjax.abort();
+  hospitalAjax.abort();
   }
   var data={};
   data.parkName=parkName;
@@ -354,7 +357,7 @@ function getNearestHospital(lat,lng){
 
   var results={};
 
-   $.ajax({
+   hospitalAjax= $.ajax({
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),
@@ -387,8 +390,8 @@ function getNearestPolice(lat,lng){
   data.lng=lng;
 
   var results={};
-
-   $.ajax({
+  
+  policeAjax=$.ajax({
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(data),
@@ -396,6 +399,7 @@ function getNearestPolice(lat,lng){
             url: 'http://localhost:3000/delphidata/police',            
             success: function(dataRes) {
               if(data){
+
                     results.name=dataRes.nearest.FACILITY;
                     results.lat=dataRes.nearest.st_x;
                     results.lng=dataRes.nearest.st_y;
@@ -414,7 +418,7 @@ function getNearestPolice(lat,lng){
              }
           
    });
-   
+
   }
 
 function showPolice(){

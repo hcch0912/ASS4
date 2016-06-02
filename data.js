@@ -76,6 +76,7 @@ module.exports.getNearestHospitalData=function(req,res){
 		});
 
 	});
+	pg.end();
 }
 
 module.exports.getPopulationData = function (req,res) {
@@ -147,6 +148,7 @@ module.exports.getNearestPoliceData=function(req,res){
 						if(res2){
 							
 							return res.send({nearest:res1.rows[0],avgDis:res2.rows[0]});
+
 						}else{
 							return res.send({delphidata:"No data present hospital"});
 						}
@@ -156,6 +158,7 @@ module.exports.getNearestPoliceData=function(req,res){
 		});
 
 	});
+	pg.end();
 }
 
 module.exports.getCemetry=function(req,res){
@@ -206,6 +209,7 @@ module.exports.getAroundFood=function(req,res){
 			}
 		});
 		});
+		pg.end();
 }
 
 module.exports.getAroundBeverage=function(req,res){
@@ -233,6 +237,7 @@ module.exports.getAroundBeverage=function(req,res){
 			}
 		});
 		});
+		pg.end();
 }
 
 module.exports.getAroundGrocery=function(req,res){
@@ -260,6 +265,7 @@ module.exports.getAroundGrocery=function(req,res){
 			}
 		});
 		});
+		pg.end();
 }
 
 
