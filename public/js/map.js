@@ -23,8 +23,8 @@ $(document).ready( function () {
 		if( !scrolled ){
 			$('#statspage').css('margin-top','0px');
 			$('#scrollhere').text("go back to map");
-			$('#dragme').css('opacity','0');
-			$('#infome').css('opacity','0');
+			$('#dragin').css('opacity','0');
+			$('#infoin').css('opacity','0');
 			scrolled = true;
 		}
 		else {
