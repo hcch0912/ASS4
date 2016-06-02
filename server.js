@@ -39,9 +39,6 @@ app.get('/map', function(req,res){
   	res.render('map');
 });
 
-app.get('/favicon.ico', function(req, res) {
-    res.send(200);
-});
 
 app.get('/getParks', function(req,res){
 	var locationData = require('./parks.json');
