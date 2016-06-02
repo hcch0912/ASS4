@@ -2,8 +2,8 @@ $(document).ready( function () {
 	var closed = false;
 	var scrolled = false;
 
-	$('#dragme').draggable();
-	$('#infome').draggable();
+	$('#left').draggable();
+	$('#right').draggable();
 
 	$('#collapse').click(function() {
 		if (!closed ) {
@@ -28,10 +28,10 @@ $(document).ready( function () {
 			scrolled = true;
 		}
 		else {
-			$('#statspage').css('margin-top','80%');
+			$('#statspage').css('margin-top','100%');
 			$('#scrollhere').text("view saved locations");
-			$('#dragme').css('opacity','1');
-			$('#infome').css('opacity','1');
+			$('#dragme').css('opacity','.99');
+			$('#infome').css('opacity','.99');
 			scrolled = false;
 		}
 	});

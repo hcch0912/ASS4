@@ -39,6 +39,7 @@ app.get('/map', function(req,res){
   	res.render('map');
 });
 
+
 app.get('/getParks', function(req,res){
 	var locationData = require('./parks.json');
   	res.send(locationData.parks);
@@ -57,6 +58,6 @@ app.post('/delphi/beverage',dataEndpoint.getAroundBeverage);
 app.post('/delphi/grocery',dataEndpoint.getAroundGrocery);
 
 
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port') || 3000, function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
