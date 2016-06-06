@@ -34,6 +34,7 @@ var thisPlace={};
 var chart;
 var saveCount=0;
 
+
 function oncheck(element){
   element.checked=element.checked;
   if(element.checked==true){
@@ -748,14 +749,16 @@ function clearClinic(){
   
 }
  
+ var parentNode=document.getElementById("savedPlaces");
 
 function saveLocation(){
-  //add all of the info to the statspage 
 
   if(thisPlace.food&&thisPlace.beverage&&thisPlace.grocery){
       if(!thisPlace.saved==true){
-          var parentNode=document.getElementById("savedPlaces");
+          
           var newDiv=document.createElement("div");
+          newDiv.id=thisPlace.name;
+          newDiv.name=thisPlace.name;
           var nameDiv=document.createElement("div");
               nameDiv.id=thisPlace.name;
               nameDiv.innerHTML="<h3>"+thisPlace.name+"</h3>";
@@ -774,7 +777,8 @@ function saveLocation(){
                 "<h4>nearest hospital:</h4>" + 
                 "<p><em>" + thisPlace.hospital.name + "</em>" + 
                 "<br><b class = 'moreDist'>" + thisPlace.hospital.dis + "</b> mi." + 
-                "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>";
+                "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>"+
+                "<br> <button  name='"+thisPlace.name+"'  onclick=\"deleteLocation(this)\">Delete</button>";
           newDiv.appendChild(nameDiv);
           newDiv.appendChild(img);
           newDiv.appendChild(infoDiv);
@@ -792,7 +796,13 @@ function saveLocation(){
                         width: {
                             ratio: 0.5 
                         }
-                    }
+                    },
+                    axis: {
+                      x: {
+                          type: 'category',
+                          categories: ['Drink', 'Food', 'Grocery']
+                      }
+                  }
             });
             saveCount++;
         }else{
@@ -812,4 +822,11 @@ function saveLocation(){
   }
 }
 
+function deleteLocation(e){
+    var placeName=e.name;
+    var removeThis=document.getElementById(placeName);
+    parentNode.removeChild(removeThis);
+    chart.unload(placeName);
+
+}
 
