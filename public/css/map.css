@@ -252,6 +252,7 @@ html, body {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 300px;
+	color:cadetblue;
 }
 
 #moreInfo h4 {

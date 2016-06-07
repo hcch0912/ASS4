@@ -92,7 +92,9 @@ h4 b {
 	font-weight: bold;
 	color: #73b6e6;
 }
-
+h3 {
+	color:cadetbule;
+}
 a {
 	color: #ffffff!important;
 	text-decoration: none;
@@ -124,5 +126,6 @@ a:hover {
 
 #toHelp {
 	font-size: 20px;
+	width:90px;
 	font-weight: normal;
 }

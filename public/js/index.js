@@ -770,14 +770,14 @@ function saveLocation(){
               infoDiv.innerHTML = 
                 "<p>" + 
                 "<h4>nearest police station:</h4>" + 
-                "<p><em>" + thisPlace.police.name + "</em>" + 
+                "<p><em style=\"color:black\">" + thisPlace.police.name + "</em>" + 
                 "<br><b class = 'moreDist'>" + thisPlace.police.dis + "</b> mi." + 
-                "<br>(avg. <b>" + thisPlace.police.avgDis + "</b> mi.)</p>" + 
+                "<br><em style=\"color:black\">(Phone : <b>" +"(858) 200 4378" + "</b> )</em></p>" + 
                 "<p>" +
                 "<h4>nearest hospital:</h4>" + 
-                "<p><em>" + thisPlace.hospital.name + "</em>" + 
+                "<p><em style=\"color:black\">" + thisPlace.hospital.name + "</em>" + 
                 "<br><b class = 'moreDist'>" + thisPlace.hospital.dis + "</b> mi." + 
-                "<br>(avg. <b>" + thisPlace.hospital.avgDis + "</b> mi.)</p>"+
+                "<br><em style=\"color:black\">(Phone: <b>" +"(800) 485 2284" + "</b> )</em></p>"+
                 "<br> <button  name='"+thisPlace.name+"'  onclick=\"deleteLocation(this)\">Delete</button>";
           newDiv.appendChild(nameDiv);
           newDiv.appendChild(img);
